@@ -129,7 +129,18 @@ for card in cards:
 st.markdown('</div>', unsafe_allow_html=True)
 
 
-import streamlit as st
+
+
+# CSS to make the main content full width
+css_code = """
+<style>
+    .main > div {
+        max-width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+</style>
+"""
 
 # HTML code to embed
 html_code = '''
@@ -141,6 +152,10 @@ html_code = '''
 <a href="https://www.canva.com/design/DAGF3gLOxfY/r7jI3obh1jMio2XWo5OOHw/view?utm_content=DAGF3gLOxfY&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Green White Illustrative Biology photosynthetic organisms Poster</a> by Minh Thông Nguyễn
 '''
 
+# Apply the custom CSS
+st.markdown(css_code, unsafe_allow_html=True)
+
 # Display the HTML in Streamlit
 st.markdown(html_code, unsafe_allow_html=True)
+
 
