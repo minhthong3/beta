@@ -123,7 +123,7 @@ cards = [
     {
         "title": "Đầu tư giá trị",
         "image_base64": image_4_base64,
-        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp",
+        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp                   ",
         "expected_return": "18%/năm",
         "risk": "Thấp"
     },
