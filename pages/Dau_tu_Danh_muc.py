@@ -19,13 +19,18 @@ image_3_base64 = image_to_base64("image.danhmuc/image_3.png")
 image_4_base64 = image_to_base64("image.danhmuc/image_4.png")
 image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
 
-# Custom CSS to style the cards
+# Custom CSS to style the cards and make the main content full width
 st.markdown("""
 <style>
+.main > div {
+    max-width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 .card-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch; /* Stretch cards to have the same height */
     gap: 10px;
 }
 .card {
@@ -36,6 +41,8 @@ st.markdown("""
     color: white;
     width: 100%;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 .card img {
     width: 100%;
@@ -62,6 +69,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: auto; /* Push button to the bottom */
 }
 button:hover {
     background-color: #0056b3;
@@ -124,20 +132,6 @@ for col, card in zip(cols, cards):
         </div>
         """, unsafe_allow_html=True)
 
-
-
-
-
-# CSS to make the main content full width
-css_code = """
-<style>
-    .main > div {
-        max-width: 100%;
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-</style>
-"""
 
 # HTML code to embed
 html_code = '''
