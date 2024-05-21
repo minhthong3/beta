@@ -26,6 +26,7 @@ st.markdown("""
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 10px;
 }
 .card {
     background-color: #1e1e1e;
@@ -33,9 +34,9 @@ st.markdown("""
     border-radius: 10px;
     text-align: center;
     color: white;
-    margin-bottom: 20px;
-    width: 100%;
-    height: 100%;
+    width: 18%;
+    flex-grow: 1;
+    box-sizing: border-box;
 }
 .card img {
     width: 100%;
@@ -108,21 +109,21 @@ cards = [
     }
 ]
 
-# Create columns and render the cards
-cols = st.columns(len(cards), gap="small")
+# Create container for cards
+st.markdown('<div class="card-container">', unsafe_allow_html=True)
 
-# Get the maximum card height
-max_height = max([len(card['description']) for card in cards])
+# Render the cards
+for card in cards:
+    st.markdown(f"""
+    <div class="card">
+        <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
+        <h3>{card['title']}</h3>
+        <p>{card['description']}</p>
+        <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
+        <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
+        <button>Xem chi tiết</button>
+    </div>
+    """, unsafe_allow_html=True)
 
-for col, card in zip(cols, cards):
-    with col:
-        st.markdown(f"""
-        <div class="card" style="height: {max_height}px;">
-            <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
-            <h3>{card['title']}</h3>
-            <p>{card['description']}</p>
-            <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
-            <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
-            <button>Xem chi tiết</button>
-        </div>
-        """, unsafe_allow_html=True)
+# Close container for cards
+st.markdown('</div>', unsafe_allow_html=True)
