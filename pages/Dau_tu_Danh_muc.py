@@ -4,8 +4,10 @@ import base64
 from io import BytesIO
 
 # Function to convert image to base64
-def image_to_base64(img_path):
+@st.cache
+def image_to_base64(img_path, resize_to=(300, 300)):
     img = Image.open(img_path)
+    img = img.resize(resize_to)  # Resize image to reduce file size
     buffered = BytesIO()
     img.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode()
