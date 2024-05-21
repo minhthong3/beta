@@ -1,44 +1,33 @@
 import streamlit as st
-import sys
-import codecs
-
 from streamlit_navigation_bar import st_navbar
 
-page = st_navbar(["Home", "Documentation", "Examples", "Community", "About"])
-st.write(page)
 
-# Sidebar title
-st.sidebar.title("VNWEALTH")
+st.set_page_config(initial_sidebar_state="collapsed")
 
-# Sidebar menu with custom icons
-menu_items = {
-    "Thị trường": "📈",
-    "Cổ phiếu chọn lọc": "⭐",
-    "Đầu tư Danh mục": "📊",
-    "Flash Deal": "⚡",
-    "Hướng dẫn sử dụng": "📘",
-    "Liên hệ": "📞"
+pages = ["Home", "Library", "Tutorials", "Development", "Download"]
+styles = {
+    "nav": {
+        "background-color": "rgb(123, 209, 146)",
+    },
+    "div": {
+        "max-width": "32rem",
+    },
+    "span": {
+        "border-radius": "0.5rem",
+        "color": "rgb(49, 51, 63)",
+        "margin": "0 0.125rem",
+        "padding": "0.4375rem 0.625rem",
+    },
+    "active": {
+        "background-color": "rgba(255, 255, 255, 0.25)",
+    },
+    "hover": {
+        "background-color": "rgba(255, 255, 255, 0.35)",
+    },
 }
 
-selected_item = st.sidebar.radio(
-    "",
-    list(menu_items.keys()),
-    format_func=lambda x: f"{menu_items[x]} {x}"
-)
+page = st_navbar(pages, styles=styles)
+st.write(page)
 
-# Link to the respective pages using st.page_link
-if selected_item == "Thị trường":
-    st.page_link("pages/Thị_trường.py", label="Thị trường", icon="📈")
-elif selected_item == "Cổ phiếu chọn lọc":
-    st.page_link("pages/Co_phieu_chon_loc.py", label="Cổ phiếu chọn lọc", icon="⭐")
-elif selected_item == "Đầu tư Danh mục":
-    st.page_link("pages/Dau_tu_Danh_muc.py", label="Đầu tư Danh mục", icon="📊")
-elif selected_item == "Flash Deal":
-    st.page_link("pages/Flash_Deal.py", label="Flash Deal", icon="⚡")
-elif selected_item == "Hướng dẫn sử dụng":
-    st.page_link("pages/Huong_dan_su_dung.py", label="Hướng dẫn sử dụng", icon="📘")
-elif selected_item == "Liên hệ":
-    st.page_link("pages/Lien_he.py", label="Liên hệ", icon="📞")
-
-# Additional main page content
-st.write("Chào mừng bạn đến với trang web của chúng tôi! Tại đây, bạn có thể tìm hiểu thêm về thị trường, các cổ phiếu chọn lọc, cách đầu tư danh mục, và các Flash Deal hiện tại. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc hướng dẫn sử dụng.")
+with st.sidebar:
+    st.write("Sidebar")
