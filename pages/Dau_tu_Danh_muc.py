@@ -4,12 +4,12 @@ import base64
 from io import BytesIO
 
 # Function to convert image to base64
-@st.cache
-def image_to_base64(img_path, resize_to=(300, 300)):
+@st.cache_data
+def image_to_base64(img_path, resize_to=(300, 300), quality=85):
     img = Image.open(img_path)
     img = img.resize(resize_to)  # Resize image to reduce file size
     buffered = BytesIO()
-    img.save(buffered, format="PNG")
+    img.save(buffered, format="JPEG", quality=quality)  # Save as JPEG to reduce size
     return base64.b64encode(buffered.getvalue()).decode()
 
 # Load and convert images to base64
@@ -22,14 +22,19 @@ image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
 # Custom CSS to style the cards
 st.markdown("""
 <style>
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 .card {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     color: white;
-    box-sizing: border-box;
     margin-bottom: 20px;
+    width: 100%;
 }
 .card img {
     width: 100%;
@@ -109,7 +114,7 @@ for col, card in zip(cols, cards):
     with col:
         st.markdown(f"""
         <div class="card">
-            <img src="data:image/png;base64,{card['image_base64']}" alt="{card['title']}">
+            <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
             <h3>{card['title']}</h3>
             <p>{card['description']}</p>
             <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
