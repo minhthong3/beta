@@ -1,8 +1,6 @@
 import streamlit as st
 import base64
 
-
-
 # Link to the respective pages
 if selected_item == "Thông tin thị trường":
     st.switch_page("Thong_tin_thi_truong")
