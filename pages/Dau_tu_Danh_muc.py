@@ -116,7 +116,7 @@ cards = [
     {
         "title": "Cổ tức ổn định",
         "image_base64": image_3_base64,
-        "description": "Doanh nghiệp hoạt động kinh doanh ổn định, chi trả cổ tức cao và đều",
+        "description": "Doanh nghiệp hoạt động kinh doanh ổn định, chi trả cổ tức cao và đều, thanh khoản tốt",
         "expected_return": "12%/năm",
         "risk": "Thấp"
     },
