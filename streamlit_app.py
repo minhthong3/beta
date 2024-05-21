@@ -19,19 +19,19 @@ selected_item = st.sidebar.radio(
     format_func=lambda x: f"{menu_items[x]} {x}"
 )
 
-# Link to the respective pages
+# Link to the respective pages using st.page_link
 if selected_item == "Thị trường":
-    st.experimental_rerun("Thong_tin_thi_truong")
+    st.page_link("pages/Thi_truong.py", label="Thị trường", icon="📈")
 elif selected_item == "Cổ phiếu chọn lọc":
-    st.experimental_rerun("Co_phieu_chon_loc")
+    st.page_link("pages/Co_phieu_chon_loc.py", label="Cổ phiếu chọn lọc", icon="⭐")
 elif selected_item == "Đầu tư Danh mục":
-    st.experimental_rerun("Dau_tu_Danh_muc")
+    st.page_link("pages/Dau_tu_Danh_muc.py", label="Đầu tư Danh mục", icon="📊")
 elif selected_item == "Flash Deal":
-    st.experimental_rerun("Flash_Deal")
+    st.page_link("pages/Flash_Deal.py", label="Flash Deal", icon="⚡")
 elif selected_item == "Hướng dẫn sử dụng":
-    st.experimental_rerun("Huong_dan_su_dung")
+    st.page_link("pages/Huong_dan_su_dung.py", label="Hướng dẫn sử dụng", icon="📘")
 elif selected_item == "Liên hệ":
-    st.experimental_rerun("Lien_he")
+    st.page_link("pages/Lien_he.py", label="Liên hệ", icon="📞")
 
 # Additional main page content
 st.write("Chào mừng bạn đến với trang web của chúng tôi! Tại đây, bạn có thể tìm hiểu thêm về thị trường, các cổ phiếu chọn lọc, cách đầu tư danh mục, và các Flash Deal hiện tại. Hãy liên hệ với chúng tôi nếu bạn cần hỗ trợ hoặc hướng dẫn sử dụng.")
