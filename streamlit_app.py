@@ -5,7 +5,7 @@ st.sidebar.title("VNWEALTH")
 
 # Sidebar menu with custom icons
 menu_items = {
-    "Thông tin thị trường": "📈",
+    "Thị trường": "📈",
     "Cổ phiếu chọn lọc": "⭐",
     "Đầu tư Danh mục": "📊",
     "Flash Deal": "⚡",
@@ -20,7 +20,7 @@ selected_item = st.sidebar.radio(
 )
 
 # Link to the respective pages
-if selected_item == "Thông tin thị trường":
+if selected_item == "Thị trường":
     st.experimental_rerun("Thong_tin_thi_truong")
 elif selected_item == "Cổ phiếu chọn lọc":
     st.experimental_rerun("Co_phieu_chon_loc")
