@@ -1,24 +1,7 @@
 import streamlit as st
 import base64
 
-# Sidebar title
-st.sidebar.title("VNWEALTH")
 
-# Sidebar menu with custom icons
-menu_items = {
-    "Thông tin thị trường": "📈",
-    "Cổ phiếu chọn lọc": "⭐",
-    "Đầu tư Danh mục": "📊",
-    "Flash Deal": "⚡",
-    "Hướng dẫn sử dụng": "📘",
-    "Liên hệ": "📞"
-}
-
-selected_item = st.sidebar.radio(
-    "",
-    list(menu_items.keys()),
-    format_func=lambda x: f"{menu_items[x]} {x}"
-)
 
 # Display page links in the main content
 if selected_item == "Thông tin thị trường":
