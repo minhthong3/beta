@@ -121,4 +121,3 @@ for card in cards:
     </div>
     """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
-
