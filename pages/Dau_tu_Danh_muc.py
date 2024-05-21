@@ -20,21 +20,14 @@ image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
 # Custom CSS to style the cards
 st.markdown("""
 <style>
-.card-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-}
 .card {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 10px;
-    width: 18%;
     text-align: center;
-    margin-bottom: 20px;
     color: white;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
 .card img {
     width: 100%;
@@ -107,17 +100,18 @@ cards = [
     }
 ]
 
-# Render the cards
-st.markdown('<div class="card-container">', unsafe_allow_html=True)
-for card in cards:
-    st.markdown(f"""
-    <div class="card">
-        <img src="data:image/png;base64,{card['image_base64']}" alt="{card['title']}">
-        <h3>{card['title']}</h3>
-        <p>{card['description']}</p>
-        <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
-        <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
-        <button>Xem chi tiết</button>
-    </div>
-    """, unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
+# Create columns and render the cards
+cols = st.columns(len(cards), gap="small")
+
+for col, card in zip(cols, cards):
+    with col:
+        st.markdown(f"""
+        <div class="card">
+            <img src="data:image/png;base64,{card['image_base64']}" alt="{card['title']}">
+            <h3>{card['title']}</h3>
+            <p>{card['description']}</p>
+            <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
+            <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
+            <button>Xem chi tiết</button>
+        </div>
+        """, unsafe_allow_html=True)
