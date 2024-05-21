@@ -25,7 +25,7 @@ selected_item = st.sidebar.radio(
 
 # Link to the respective pages using st.page_link
 if selected_item == "Thị trường":
-    st.page_link("pages/Thi_truong.py", label="Thị trường", icon="📈")
+    st.page_link("pages/Thị_trường.py", label="Thị trường", icon="📈")
 elif selected_item == "Cổ phiếu chọn lọc":
     st.page_link("pages/Co_phieu_chon_loc.py", label="Cổ phiếu chọn lọc", icon="⭐")
 elif selected_item == "Đầu tư Danh mục":
