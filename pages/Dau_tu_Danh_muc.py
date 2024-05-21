@@ -2,15 +2,20 @@ import streamlit as st
 from PIL import Image
 import base64
 from io import BytesIO
+import os
 
 # Function to convert image to base64
 @st.cache_data
 def image_to_base64(img_path, resize_to=(300, 300), quality=85):
-    img = Image.open(img_path)
-    img = img.resize(resize_to)  # Resize image to reduce file size
-    buffered = BytesIO()
-    img.save(buffered, format="JPEG", quality=quality)  # Save as JPEG to reduce size
-    return base64.b64encode(buffered.getvalue()).decode()
+    if os.path.exists(img_path):
+        img = Image.open(img_path)
+        img = img.resize(resize_to)  # Resize image to reduce file size
+        buffered = BytesIO()
+        img.save(buffered, format="JPEG", quality=quality)  # Save as JPEG to reduce size
+        return base64.b64encode(buffered.getvalue()).decode()
+    else:
+        st.error(f"File not found: {img_path}")
+        return ""
 
 # Load and convert images to base64
 image_1_base64 = image_to_base64("image.danhmuc/image_1.png")
@@ -43,6 +48,7 @@ st.markdown("""
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    visibility: hidden; /* Hide the card initially */
 }
 .card img {
     width: 100%;
@@ -75,26 +81,6 @@ button:hover {
     background-color: #0056b3;
 }
 </style>
-<script>
-    // Wait until the DOM is fully loaded
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all card elements
-        const cards = document.querySelectorAll('.card');
-        let maxHeight = 0;
-
-        // Find the maximum height of the cards
-        cards.forEach(card => {
-            if (card.offsetHeight > maxHeight) {
-                maxHeight = card.offsetHeight;
-            }
-        });
-
-        // Set all cards to the maximum height
-        cards.forEach(card => {
-            card.style.height = maxHeight + 'px';
-        });
-    });
-</script>
 """, unsafe_allow_html=True)
 
 # Card data
@@ -136,6 +122,18 @@ cards = [
     }
 ]
 
+# Create a hidden card for measurement
+st.markdown(f"""
+<div class="card hidden" id="measurementCard">
+    <img src="data:image/jpeg;base64,{cards[0]['image_base64']}" alt="{cards[0]['title']}">
+    <h3>{cards[0]['title']}</h3>
+    <p>{cards[0]['description']}</p>
+    <p>Sinh lời kỳ vọng: <span class="highlight">{cards[0]['expected_return']}</span></p>
+    <p>Rủi ro: <span class="highlight yellow">{cards[0]['risk']}</span></p>
+    <button>Xem chi tiết</button>
+</div>
+""", unsafe_allow_html=True)
+
 # Create columns and render the cards
 cols = st.columns(len(cards), gap="small")
 
@@ -151,3 +149,26 @@ for col, card in zip(cols, cards):
             <button>Xem chi tiết</button>
         </div>
         """, unsafe_allow_html=True)
+
+# JavaScript to set the height of all cards to the maximum height and remove the hidden card
+st.markdown("""
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the hidden card for measurement
+        const measurementCard = document.getElementById('measurementCard');
+        const maxHeight = measurementCard.offsetHeight;
+
+        // Get all card elements
+        const cards = document.querySelectorAll('.card:not(.hidden)');
+        
+        // Set all cards to the maximum height
+        cards.forEach(card => {
+            card.style.height = maxHeight + 'px';
+            card.style.visibility = 'visible'; // Make all cards visible
+        });
+
+        // Remove the measurement card
+        measurementCard.remove();
+    });
+</script>
+""", unsafe_allow_html=True)
