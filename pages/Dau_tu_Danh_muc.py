@@ -35,17 +35,18 @@ st.markdown("""
     color: white;
     margin-bottom: 20px;
     width: 100%;
+    height: 100%;
 }
 .card img {
     width: 100%;
     border-radius: 10px;
 }
 .card h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin: 10px 0;
 }
 .card p {
-    font-size: 1em;
+    font-size: 0.9em;
     margin: 5px 0;
 }
 .card .highlight {
@@ -110,10 +111,13 @@ cards = [
 # Create columns and render the cards
 cols = st.columns(len(cards), gap="small")
 
+# Get the maximum card height
+max_height = max([len(card['description']) for card in cards])
+
 for col, card in zip(cols, cards):
     with col:
         st.markdown(f"""
-        <div class="card">
+        <div class="card" style="height: {max_height}px;">
             <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
             <h3>{card['title']}</h3>
             <p>{card['description']}</p>
