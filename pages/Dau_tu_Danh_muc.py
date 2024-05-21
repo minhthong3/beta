@@ -43,6 +43,7 @@ st.markdown("""
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    visibility: hidden; /* Hide the initial measurement card */
 }
 .card img {
     width: 100%;
@@ -78,21 +79,21 @@ button:hover {
 <script>
     // Wait until the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function() {
+        // Get the hidden card for measurement
+        const measurementCard = document.querySelector('.card.hidden');
+        const height = measurementCard.offsetHeight;
+
         // Get all card elements
         const cards = document.querySelectorAll('.card');
-        let maxHeight = 0;
-
-        // Find the maximum height of the cards
-        cards.forEach(card => {
-            if (card.offsetHeight > maxHeight) {
-                maxHeight = card.offsetHeight;
-            }
-        });
-
+        
         // Set all cards to the maximum height
         cards.forEach(card => {
-            card.style.height = maxHeight + 'px';
+            card.style.height = height + 'px';
+            card.style.visibility = 'visible'; // Make all cards visible
         });
+
+        // Remove the measurement card
+        measurementCard.remove();
     });
 </script>
 """, unsafe_allow_html=True)
@@ -135,6 +136,21 @@ cards = [
         "risk": "Trung bình thấp"
     }
 ]
+
+# Find the card with the maximum content
+max_card = max(cards, key=lambda card: len(card['description']))
+
+# Create a hidden card for measurement
+st.markdown(f"""
+<div class="card hidden">
+    <img src="data:image/jpeg;base64,{max_card['image_base64']}" alt="{max_card['title']}">
+    <h3>{max_card['title']}</h3>
+    <p>{max_card['description']}</p>
+    <p>Sinh lời kỳ vọng: <span class="highlight">{max_card['expected_return']}</span></p>
+    <p>Rủi ro: <span class="highlight yellow">{max_card['risk']}</span></p>
+    <button>Xem chi tiết</button>
+</div>
+""", unsafe_allow_html=True)
 
 # Create columns and render the cards
 cols = st.columns(len(cards), gap="small")
