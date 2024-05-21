@@ -3,17 +3,6 @@ from PIL import Image
 import base64
 from io import BytesIO
 
-# CSS to make the main content full width
-css_code = """
-<style>
-    .main > div {
-        max-width: 100%;
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-</style>
-"""
-
 # Function to convert image to base64
 @st.cache_data
 def image_to_base64(img_path, resize_to=(300, 300), quality=85):
@@ -30,9 +19,14 @@ image_3_base64 = image_to_base64("image.danhmuc/image_3.png")
 image_4_base64 = image_to_base64("image.danhmuc/image_4.png")
 image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
 
-# Custom CSS to style the cards
+# Custom CSS to style the cards and make the main content full width
 st.markdown("""
 <style>
+.main > div {
+    max-width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 .card-container {
     display: flex;
     justify-content: space-between;
@@ -137,9 +131,3 @@ for col, card in zip(cols, cards):
             <button>Xem chi tiết</button>
         </div>
         """, unsafe_allow_html=True)
-
-
-# Display the HTML in Streamlit
-st.markdown(html_code, unsafe_allow_html=True)
-
-
