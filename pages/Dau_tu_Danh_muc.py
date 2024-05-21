@@ -8,11 +8,11 @@ import streamlit as st
 from PIL import Image
 
 # Load images
-image_1 = Image.open("/mnt/data/A_series_of_five_distinct_images_representing_vari.png").crop((0, 0, 512, 512)) # Chess piece
-image_2 = Image.open("/mnt/data/A_series_of_five_distinct_images_representing_vari.png").crop((512, 0, 1024, 512)) # Surfer
-image_3 = Image.open("/mnt/data/A_series_of_five_distinct_images_representing_vari.png").crop((1024, 0, 1536, 512)) # Coins
-image_4 = Image.open("/mnt/data/A_series_of_five_distinct_images_representing_vari.png").crop((0, 512, 512, 1024)) # Tree
-image_5 = Image.open("/mnt/data/A_series_of_five_distinct_images_representing_vari.png").crop((512, 512, 1024, 1024)) # Boxing gloves
+image_1 = Image.open("image.danhmuc/image_1.png").crop((0, 0, 512, 512)) # Chess piece
+image_2 = Image.open("image.danhmuc/image_2.png").crop((512, 0, 1024, 512)) # Surfer
+image_3 = Image.open("image.danhmuc/image_3.png").crop((1024, 0, 1536, 512)) # Coins
+image_4 = Image.open("image.danhmuc/image_4.png").crop((0, 512, 512, 1024)) # Tree
+image_5 = Image.open("image.danhmuc/image_5.png").crop((512, 512, 1024, 1024)) # Boxing gloves
 
 # Custom CSS to style the cards
 st.markdown("""
