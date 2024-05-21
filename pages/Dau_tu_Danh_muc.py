@@ -34,20 +34,19 @@ st.markdown("""
     border-radius: 10px;
     text-align: center;
     color: white;
-    width: 18%;
-    flex-grow: 1;
-    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 20px;
 }
 .card img {
     width: 100%;
     border-radius: 10px;
 }
 .card h3 {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin: 10px 0;
 }
 .card p {
-    font-size: 0.9em;
+    font-size: 1em;
     margin: 5px 0;
 }
 .card .highlight {
@@ -109,24 +108,22 @@ cards = [
     }
 ]
 
-# Create container for cards
-st.markdown('<div class="card-container">', unsafe_allow_html=True)
+# Create columns and render the cards
+cols = st.columns(len(cards), gap="small")
 
-# Render the cards
-for card in cards:
-    st.markdown(f"""
-    <div class="card">
-        <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
-        <h3>{card['title']}</h3>
-        <p>{card['description']}</p>
-        <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
-        <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
-        <button>Xem chi tiết</button>
-    </div>
-    """, unsafe_allow_html=True)
+for col, card in zip(cols, cards):
+    with col:
+        st.markdown(f"""
+        <div class="card">
+            <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
+            <h3>{card['title']}</h3>
+            <p>{card['description']}</p>
+            <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
+            <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
+            <button>Xem chi tiết</button>
+        </div>
+        """, unsafe_allow_html=True)
 
-# Close container for cards
-st.markdown('</div>', unsafe_allow_html=True)
 
 
 
