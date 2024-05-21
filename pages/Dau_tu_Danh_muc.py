@@ -75,6 +75,26 @@ button:hover {
     background-color: #0056b3;
 }
 </style>
+<script>
+    // Wait until the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all card elements
+        const cards = document.querySelectorAll('.card');
+        let maxHeight = 0;
+
+        // Find the maximum height of the cards
+        cards.forEach(card => {
+            if (card.offsetHeight > maxHeight) {
+                maxHeight = card.offsetHeight;
+            }
+        });
+
+        // Set all cards to the maximum height
+        cards.forEach(card => {
+            card.style.height = maxHeight + 'px';
+        });
+    });
+</script>
 """, unsafe_allow_html=True)
 
 # Card data
