@@ -2,8 +2,6 @@ import streamlit as st
 import sys
 import codecs
 
-sys.stdout = codecs.getwriter("utf-8")(sys.stdout.buffer)
-
 # Sidebar title
 st.sidebar.title("VNWEALTH")
 
