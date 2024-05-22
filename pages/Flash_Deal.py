@@ -29,3 +29,37 @@ st.markdown(css_code, unsafe_allow_html=True)
 
 # Hiển thị HTML trong Streamlit
 st.markdown(html_code, unsafe_allow_html=True)
+
+
+
+# Thiết lập tiêu đề cho ứng dụng
+st.title("Ứng dụng Streamlit với 5 Tab")
+
+# Sử dụng st.tabs để tạo các tab
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["1", "2", "3", "4", "5"])
+
+# Nội dung cho tab 1
+with tab1:
+    st.header("Tab 1")
+    st.write("Đây là nội dung của Tab 1.")
+
+# Nội dung cho tab 2
+with tab2:
+    st.header("Tab 2")
+    st.write("Đây là nội dung của Tab 2.")
+
+# Nội dung cho tab 3
+with tab3:
+    st.header("Tab 3")
+    st.write("Đây là nội dung của Tab 3.")
+
+# Nội dung cho tab 4
+with tab4:
+    st.header("Tab 4")
+    st.write("Đây là nội dung của Tab 4.")
+
+# Nội dung cho tab 5
+with tab5:
+    st.header("Tab 5")
+    st.write("Đây là nội dung của Tab 5.")
+
