@@ -6,44 +6,141 @@ def get_image_base64(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
-# Danh sách các thẻ với thông tin chi tiết
+# Function to convert image to base64
+@st.cache_data
+def image_to_base64(img_path, resize_to=(300, 300), quality=85):
+    img = Image.open(img_path)
+    img = img.resize(resize_to)  # Resize image to reduce file size
+    buffered = BytesIO()
+    img.save(buffered, format="JPEG", quality=quality)  # Save as JPEG to reduce size
+    return base64.b64encode(buffered.getvalue()).decode()
+
+# Load and convert images to base64
+image_1_base64 = image_to_base64("image.danhmuc/image_1.png")
+image_2_base64 = image_to_base64("image.danhmuc/image_2.png")
+image_3_base64 = image_to_base64("image.danhmuc/image_3.png")
+image_4_base64 = image_to_base64("image.danhmuc/image_4.png")
+image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
+
+# Custom CSS to style the cards and make the main content full width
+st.markdown("""
+<style>
+.main > div {
+    max-width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Stretch cards to have the same height */
+    gap: 10px;
+}
+.card {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+.card h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+.card p {
+    font-size: 1em;
+    margin: 5px 0;
+}
+.card .highlight {
+    color: #00FF00; /* Green */
+}
+.card .highlight.yellow {
+    color: #FFFF00; /* Yellow */
+}
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto; /* Push button to the bottom */
+}
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+<script>
+    // Wait until the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all card elements
+        const cards = document.querySelectorAll('.card');
+        let maxHeight = 0;
+
+        // Find the maximum height of the cards
+        cards.forEach(card => {
+            if (card.offsetHeight > maxHeight) {
+                maxHeight = card.offsetHeight;
+            }
+        });
+
+        // Set all cards to the maximum height
+        cards.forEach(card => {
+            card.style.height = maxHeight + 'px';
+        });
+    });
+</script>
+""", unsafe_allow_html=True)
+
+# Card data
 cards = [
     {
         "title": "Nâng hạng thị trường",
+        "image_base64": image_1_base64,
         "description": "Các DN đáp ứng tiêu chí nâng hạng thị trường theo FTSE và MSCI",
         "expected_return": "15%/năm",
-        "risk": "Trung bình",
-        "image_base64": get_image_base64("/mnt/data/image1.jpg")
+        "risk": "Trung bình"
     },
     {
         "title": "Đầu tư thuận xu thế",
+        "image_base64": image_2_base64,
         "description": "Các DN Ngân hàng, Chứng khoán, Thép hình thành xu hướng mạnh về...",
         "expected_return": "30%/năm",
-        "risk": "Trung bình cao",
-        "image_base64": get_image_base64("/mnt/data/image2.jpg")
+        "risk": "Trung bình cao"
     },
     {
         "title": "Cổ tức ổn định",
+        "image_base64": image_3_base64,
         "description": "Doanh nghiệp hoạt động kinh doanh ổn định, chi trả cổ tức cao và đều, thanh khoản tốt",
         "expected_return": "12%/năm",
-        "risk": "Thấp",
-        "image_base64": get_image_base64("/mnt/data/image3.jpg")
+        "risk": "Thấp"
     },
     {
         "title": "Đầu tư giá trị",
-        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp.",
+        "image_base64": image_4_base64,
+        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp                   .",
         "expected_return": "18%/năm",
-        "risk": "Thấp",
-        "image_base64": get_image_base64("/mnt/data/image4.jpg")
+        "risk": "Thấp"
     },
     {
         "title": "Lợi thế cạnh tranh",
+        "image_base64": image_5_base64,
         "description": "DN có tỷ suất lợi nhuận cao, sức khỏe tài chính lành mạnh",
         "expected_return": "20%/năm",
-        "risk": "Trung bình thấp",
-        "image_base64": get_image_base64("/mnt/data/image5.jpg")
-    },
+        "risk": "Trung bình thấp"
+    }
 ]
+
+# Create columns and render the cards
+cols = st.columns(len(cards), gap="small")
 
 # Tạo các tab cho nội dung chi tiết
 tabs = st.tabs([card['title'] for card in cards])
