@@ -1,156 +1,69 @@
 import streamlit as st
-from PIL import Image
-import base64
-from io import BytesIO
 
-# Function to convert image to base64
-@st.cache_data
-def image_to_base64(img_path, resize_to=(300, 300), quality=85):
-    img = Image.open(img_path)
-    img = img.resize(resize_to)  # Resize image to reduce file size
-    buffered = BytesIO()
-    img.save(buffered, format="JPEG", quality=quality)  # Save as JPEG to reduce size
-    return base64.b64encode(buffered.getvalue()).decode()
+# Thiết lập tiêu đề cho ứng dụng
+st.title(" vnwPortfolio ")
+st. write('VNWEALTH mang đến sản phẩm Danh mục đầu tư mẫu với 5 danh mục được nghiên cứu theo chiến lược của các huyền thoại đầu tư như Warren Buffett hay Philip Fisher, để sẵn sàng cùng bạn chạm được cột mốc cao nhất trong hành trình này.')
 
-# Load and convert images to base64
-image_1_base64 = image_to_base64("image.danhmuc/image_1.png")
-image_2_base64 = image_to_base64("image.danhmuc/image_2.png")
-image_3_base64 = image_to_base64("image.danhmuc/image_3.png")
-image_4_base64 = image_to_base64("image.danhmuc/image_4.png")
-image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
-
-# Custom CSS to style the cards and make the main content full width
-st.markdown("""
+# CSS để làm cho nội dung chính rộng toàn màn hình
+css_code = """
 <style>
-.main > div {
-    max-width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-.card-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch; /* Stretch cards to have the same height */
-    gap: 10px;
-}
-.card {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.card img {
-    width: 100%;
-    border-radius: 10px;
-}
-.card h3 {
-    font-size: 1.5em;
-    margin: 10px 0;
-}
-.card p {
-    font-size: 1em;
-    margin: 5px 0;
-}
-.card .highlight {
-    color: #00FF00; /* Green */
-}
-.card .highlight.yellow {
-    color: #FFFF00; /* Yellow */
-}
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: auto; /* Push button to the bottom */
-}
-button:hover {
-    background-color: #0056b3;
-}
-</style>
-<script>
-    // Wait until the DOM is fully loaded
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all card elements
-        const cards = document.querySelectorAll('.card');
-        let maxHeight = 0;
-
-        // Find the maximum height of the cards
-        cards.forEach(card => {
-            if (card.offsetHeight > maxHeight) {
-                maxHeight = card.offsetHeight;
-            }
-        });
-
-        // Set all cards to the maximum height
-        cards.forEach(card => {
-            card.style.height = maxHeight + 'px';
-        });
-    });
-</script>
-""", unsafe_allow_html=True)
-
-# Card data
-cards = [
-    {
-        "title": "Nâng hạng thị trường",
-        "image_base64": image_1_base64,
-        "description": "Các DN đáp ứng tiêu chí nâng hạng thị trường theo FTSE và MSCI",
-        "expected_return": "15%/năm",
-        "risk": "Trung bình"
-    },
-    {
-        "title": "Đầu tư thuận xu thế",
-        "image_base64": image_2_base64,
-        "description": "Các DN Ngân hàng, Chứng khoán, Thép hình thành xu hướng mạnh về...",
-        "expected_return": "30%/năm",
-        "risk": "Trung bình cao"
-    },
-    {
-        "title": "Cổ tức ổn định",
-        "image_base64": image_3_base64,
-        "description": "Doanh nghiệp hoạt động kinh doanh ổn định, chi trả cổ tức cao và đều, thanh khoản tốt",
-        "expected_return": "12%/năm",
-        "risk": "Thấp"
-    },
-    {
-        "title": "Đầu tư giá trị",
-        "image_base64": image_4_base64,
-        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp                   .",
-        "expected_return": "18%/năm",
-        "risk": "Thấp"
-    },
-    {
-        "title": "Lợi thế cạnh tranh",
-        "image_base64": image_5_base64,
-        "description": "DN có tỷ suất lợi nhuận cao, sức khỏe tài chính lành mạnh",
-        "expected_return": "20%/năm",
-        "risk": "Trung bình thấp"
+    .main > div {
+        max-width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
-]
+</style>
+"""
 
-# Create columns and render the cards
-cols = st.columns(len(cards), gap="small")
+# Mã HTML để nhúng
+html_code = '''
 
-for col, card in zip(cols, cards):
-    with col:
-        st.markdown(f"""
-        <div class="card">
-            <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}">
-            <h3>{card['title']}</h3>
-            <p>{card['description']}</p>
-            <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
-            <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
-            <button>Xem chi tiết</button>
-        </div>
-        """, unsafe_allow_html=True)
+<div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.2em; margin-bottom: 0.5em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGF7v8behA&#x2F;aeUkg5aplUgG4XKANvKrSw&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGF7v8behA&#x2F;aeUkg5aplUgG4XKANvKrSw&#x2F;view?utm_content=DAGF7v8behA&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">
+'''
+
+# Áp dụng CSS tùy chỉnh
+st.markdown(css_code, unsafe_allow_html=True)
+
+# Hiển thị HTML trong Streamlit
+st.markdown(html_code, unsafe_allow_html=True)
 
 
-        
+
+# Thiết lập tiêu đề cho ứng dụng
+st.title("XEM CHI TIẾT")
+
+# Sử dụng st.tabs để tạo các tab
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đầu tư giá trị", "Đầu tư tăng trưởng", "Cổ tức bền vững", "Đầu tư phòng thủ", "Cơ hội đổi đời"])
+
+# Nội dung cho tab 1
+with tab1:
+    st.header("Đầu tư giá trị")
+    st.write("Đây là nội dung của Tab 1.")
+
+# Nội dung cho tab 2
+with tab2:
+    st.header("Đầu tư tăng trưởng")
+    st.write("Đây là nội dung của Tab 2.")
+
+# Nội dung cho tab 3
+with tab3:
+    st.header("Cổ tức bền vững")
+    st.write("Đây là nội dung của Tab 3.")
+
+# Nội dung cho tab 4
+with tab4:
+    st.header("Đầu tư phòng thủ")
+    st.write("Đây là nội dung của Tab 4.")
+
+# Nội dung cho tab 5
+with tab5:
+    st.header("Cơ hội đổi đời")
+    st.write("Đây là nội dung của Tab 5.")
+
