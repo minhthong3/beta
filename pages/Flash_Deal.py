@@ -1,5 +1,9 @@
 import streamlit as st
 
+# Thiết lập tiêu đề cho ứng dụng
+st.title(" vnwPortfolio ")
+st. write('VPBankS mang đến sản phẩm Danh mục đầu tư mẫu với 5 danh mục được nghiên cứu theo chiến lược của các huyền thoại đầu tư như Warren Buffett hay Philip Fisher, để sẵn sàng cùng bạn chạm được cột mốc cao nhất trong hành trình này.')
+
 # CSS để làm cho nội dung chính rộng toàn màn hình
 css_code = """
 <style>
