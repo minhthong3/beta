@@ -38,7 +38,7 @@ st.markdown(html_code, unsafe_allow_html=True)
 
 # Thiết lập tiêu đề cho ứng dụng
 st.title("XEM CHI TIẾT")
-
+st.write('Được cập nhật mỗi tháng, cập nhật gần nhất 02/05/2024')
 # Sử dụng st.tabs để tạo các tab
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đầu tư giá trị", "Đầu tư tăng trưởng", "Cổ tức bền vững", "Đầu tư phòng thủ", "Cơ hội đổi đời"])
 
