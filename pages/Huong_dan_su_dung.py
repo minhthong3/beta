@@ -1,13 +1,9 @@
 import streamlit as st
+from PIL import Image
 import base64
-
-# Đọc hình ảnh từ file và chuyển sang base64
-def get_image_base64(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode()
+from io import BytesIO
 
 # Function to convert image to base64
-@st.cache_data
 def image_to_base64(img_path, resize_to=(300, 300), quality=85):
     img = Image.open(img_path)
     img = img.resize(resize_to)  # Resize image to reduce file size
@@ -16,11 +12,11 @@ def image_to_base64(img_path, resize_to=(300, 300), quality=85):
     return base64.b64encode(buffered.getvalue()).decode()
 
 # Load and convert images to base64
-image_1_base64 = image_to_base64("image.danhmuc/image_1.png")
-image_2_base64 = image_to_base64("image.danhmuc/image_2.png")
-image_3_base64 = image_to_base64("image.danhmuc/image_3.png")
-image_4_base64 = image_to_base64("image.danhmuc/image_4.png")
-image_5_base64 = image_to_base64("image.danhmuc/image_5.png")
+image_1_base64 = image_to_base64("/mnt/data/image.png")
+image_2_base64 = image_to_base64("/mnt/data/image.png")
+image_3_base64 = image_to_base64("/mnt/data/image.png")
+image_4_base64 = image_to_base64("/mnt/data/image.png")
+image_5_base64 = image_to_base64("/mnt/data/image.png")
 
 # Custom CSS to style the cards and make the main content full width
 st.markdown("""
@@ -126,7 +122,7 @@ cards = [
     {
         "title": "Đầu tư giá trị",
         "image_base64": image_4_base64,
-        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp                   .",
+        "description": "DN có sức khỏe tài chính lành mạnh, cổ tức cao, biến động giá thấp.",
         "expected_return": "18%/năm",
         "risk": "Thấp"
     },
@@ -138,9 +134,6 @@ cards = [
         "risk": "Trung bình thấp"
     }
 ]
-
-# Create columns and render the cards
-cols = st.columns(len(cards), gap="small")
 
 # Tạo các tab cho nội dung chi tiết
 tabs = st.tabs([card['title'] for card in cards])
@@ -162,7 +155,15 @@ for col, card, tab in zip(cols, cards, tabs):
         """, unsafe_allow_html=True)
 
 # Hiển thị nội dung chi tiết trong các tab
-
+for tab, card in zip(tabs, cards):
+    with tab:
+        st.markdown(f"## {card['title']}")
+        st.markdown(f"""
+        <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}" style="width:100%">
+        <p>{card['description']}</p>
+        <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
+        <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
+        """)
 
 # Chuyển đến tab đã chọn nếu có
 if 'selected_tab' in st.session_state:
