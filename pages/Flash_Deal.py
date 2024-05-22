@@ -40,7 +40,7 @@ st.markdown(html_code, unsafe_allow_html=True)
 st.title("Ứng dụng Streamlit với 5 Tab")
 
 # Sử dụng st.tabs để tạo các tab
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đầu tư phòng thủ", "2", "3", "4", "5"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Đầu tư giá trị", "Đầu tư tăng trưởng", "Cổ tức bền vững", "Đầu tư phòng thủ", "Cơ hội đổi đời"])
 
 # Nội dung cho tab 1
 with tab1:
