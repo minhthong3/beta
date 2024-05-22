@@ -2,7 +2,7 @@ import streamlit as st
 
 # Thiết lập tiêu đề cho ứng dụng
 st.title(" vnwPortfolio ")
-st. write('VPBankS mang đến sản phẩm Danh mục đầu tư mẫu với 5 danh mục được nghiên cứu theo chiến lược của các huyền thoại đầu tư như Warren Buffett hay Philip Fisher, để sẵn sàng cùng bạn chạm được cột mốc cao nhất trong hành trình này.')
+st. write('VNWEALTH mang đến sản phẩm Danh mục đầu tư mẫu với 5 danh mục được nghiên cứu theo chiến lược của các huyền thoại đầu tư như Warren Buffett hay Philip Fisher, để sẵn sàng cùng bạn chạm được cột mốc cao nhất trong hành trình này.')
 
 # CSS để làm cho nội dung chính rộng toàn màn hình
 css_code = """
@@ -44,26 +44,26 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["1", "2", "3", "4", "5"])
 
 # Nội dung cho tab 1
 with tab1:
-    st.header("Tab 1")
+    st.header("Đầu tư giá trị")
     st.write("Đây là nội dung của Tab 1.")
 
 # Nội dung cho tab 2
 with tab2:
-    st.header("Tab 2")
+    st.header("Đầu tư tăng trưởng")
     st.write("Đây là nội dung của Tab 2.")
 
 # Nội dung cho tab 3
 with tab3:
-    st.header("Tab 3")
+    st.header("Cổ tức bền vững")
     st.write("Đây là nội dung của Tab 3.")
 
 # Nội dung cho tab 4
 with tab4:
-    st.header("Tab 4")
+    st.header("Đầu tư phòng thủ")
     st.write("Đây là nội dung của Tab 4.")
 
 # Nội dung cho tab 5
 with tab5:
-    st.header("Tab 5")
+    st.header("Cơ hội đổi đời")
     st.write("Đây là nội dung của Tab 5.")
 
