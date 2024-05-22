@@ -151,3 +151,18 @@ for col, card in zip(cols, cards):
             <button>Xem chi tiết</button>
         </div>
         """, unsafe_allow_html=True)
+
+# Populate the tabs with detailed content
+for i, tab in enumerate(tabs):
+    with tab:
+        card = cards[i]
+        st.markdown(f"""
+        <div id="tab-{i}">
+            <h2>{card['title']}</h2>
+            <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}" style="width: 100%; border-radius: 10px;">
+            <p>{card['description']}</p>
+            <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
+            <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
+        </div>
+        """, unsafe_allow_html=True)
+        
