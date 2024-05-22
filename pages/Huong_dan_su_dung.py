@@ -162,15 +162,7 @@ for col, card, tab in zip(cols, cards, tabs):
         """, unsafe_allow_html=True)
 
 # Hiển thị nội dung chi tiết trong các tab
-for tab, card in zip(tabs, cards):
-    with tab:
-        st.markdown(f"## {card['title']}")
-        st.markdown(f"""
-        <img src="data:image/jpeg;base64,{card['image_base64']}" alt="{card['title']}" style="width:100%">
-        <p>{card['description']}</p>
-        <p>Sinh lời kỳ vọng: <span class="highlight">{card['expected_return']}</span></p>
-        <p>Rủi ro: <span class="highlight yellow">{card['risk']}</span></p>
-        """)
+
 
 # Chuyển đến tab đã chọn nếu có
 if 'selected_tab' in st.session_state:
