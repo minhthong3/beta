@@ -3,7 +3,7 @@ import streamlit as st
 # Thiết lập tiêu đề cho ứng dụng
 st.title(" vnwPortfolio ")
 st. write('VNWEALTH mang đến sản phẩm Danh mục đầu tư mẫu với 5 danh mục được nghiên cứu theo chiến lược của các huyền thoại đầu tư như Warren Buffett hay Philip Fisher, để sẵn sàng cùng bạn chạm được cột mốc cao nhất trong hành trình này.')
-
+st. write('Danh mục cổ phiếu là một tập hợp các cổ phiếu được lựa chọn từ nhiều ngành và lĩnh vực khác nhau. Mục đích của việc xây dựng danh mục này là đa dạng hóa đầu tư, giảm thiểu rủi ro và tối đa hóa lợi nhuận dài hạn')
 # CSS để làm cho nội dung chính rộng toàn màn hình
 css_code = """
 <style>
