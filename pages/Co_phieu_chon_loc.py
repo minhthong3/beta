@@ -67,8 +67,7 @@ try:
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
     # Đặt thời gian chờ 3 giây và tự động làm mới
-    time.sleep(360)
-    st.experimental_rerun()
+
 
 except Exception as e:
     st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
