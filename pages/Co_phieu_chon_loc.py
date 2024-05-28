@@ -28,7 +28,7 @@ css = """
 st.title("Hiển thị Bảng Dữ liệu từ Google Sheets")
 
 # URL CSV từ Google Sheets
-google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTn8rFdZh3D0fL9_k1VpGflP8OeJlZoEE5tA4ISUwx3u8SdsbJZt9ohSzkEJSI1pxy5Z1iVZjFN5QQZ/pub?output=csv"
+google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStRBFjNcpDt-h9MWyZ6DQT_Oq9nv4hCI7tlxS56Pv5vNhq3i45tVvewqxE3sL30F7QfZNwacIxBEJk/pub?gid=0&single=true&output=csv"
 
 try:
     # Đọc tệp CSV từ Google Sheets
