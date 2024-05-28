@@ -67,7 +67,7 @@ try:
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
     # Đặt thời gian chờ 3 giây và tự động làm mới
-    time.sleep(3600)
+    time.sleep(360)
     st.experimental_rerun()
 
 except Exception as e:
