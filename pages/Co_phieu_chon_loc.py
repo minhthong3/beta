@@ -39,17 +39,17 @@ try:
 
     # Thêm lớp CSS tùy chỉnh cho các ô có chữ "Mua" trong cột "Khuyến nghị"
     def apply_highlight(val):
-        return 'highlight-mua' if val == 'Mua' else ''
+        return ['background-color: lightgreen' if v == 'Mua' else '' for v in val]
 
     # Áp dụng lớp CSS tùy chỉnh
-    df_styled = df.style.applymap(apply_highlight, subset=['Khuyến nghị'])
+    df_styled = df.style.apply(apply_highlight, subset=['Khuyến nghị'])
 
     # Áp dụng CSS tùy chỉnh
     st.markdown(css, unsafe_allow_html=True)
     
     # Hiển thị bảng dữ liệu với định dạng HTML và lớp CSS tùy chỉnh
     st.write("Dữ liệu của bạn:")
-    st.write(df_styled.to_html(classes='dataframe'), unsafe_allow_html=True)
+    st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
     # Hiển thị thống kê mô tả với định dạng HTML
     st.write("Thống kê mô tả:")
