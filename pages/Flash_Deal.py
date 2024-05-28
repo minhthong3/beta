@@ -53,9 +53,7 @@ def display_with_css(csv_file_path):
 
 def main():
     st.title("Google Sheets Data in Streamlit")
-    
-    st.write("Dữ liệu từ Google Sheets:")
-    
+          
     data = load_data()
     
     csv_file_path = save_to_csv(data)
