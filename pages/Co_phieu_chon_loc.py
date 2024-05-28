@@ -37,9 +37,9 @@ try:
     # Đọc tệp CSV từ Google Sheets
     df = pd.read_csv(google_sheet_csv_url)
 
-    # Thêm lớp CSS tùy chỉnh cho các ô có chữ "Mua" trong cột "Khuyến nghị"
+    # Thêm lớp CSS tùy chỉnh cho các ô có chữ "MUA" trong cột "Khuyến nghị"
     def apply_highlight(val):
-        return ['background-color: lightgreen' if v == 'Mua' else '' for v in val]
+        return ['background-color: lightgreen' if v == 'MUA' else '' for v in val]
 
     # Áp dụng lớp CSS tùy chỉnh
     df_styled = df.style.apply(apply_highlight, subset=['Khuyến nghị'])
