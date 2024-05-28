@@ -6,11 +6,11 @@ import tempfile
 
 # Cấu hình xác thực
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("path/to/your/credentials.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("image.danhmuc/datavnwealth-25a353ea3781.json", scope)
 client = gspread.authorize(creds)
 
 # URL của Google Sheets
-sheet_url = "https://docs.google.com/spreadsheets/d/your_google_sheet_id_here"
+sheet_url = "https://docs.google.com/spreadsheets/d/1kkOjUihnNpcWn8jmNM7majctXlqU18fGvwlTOVi9efg/edit#gid=0"
 
 # Đọc dữ liệu từ Google Sheets
 def load_data():
