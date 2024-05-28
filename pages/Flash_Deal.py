@@ -2,24 +2,54 @@ import streamlit as st
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import tempfile
 
 # Cấu hình xác thực
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("image.danhmuc/datavnwealth-25a353ea3781.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("path/to/your/credentials.json", scope)
 client = gspread.authorize(creds)
 
 # URL của Google Sheets
 sheet_url = "https://docs.google.com/spreadsheets/d/your_google_sheet_id_here"
 
 # Đọc dữ liệu từ Google Sheets
-@st.cache_data
 def load_data():
     sheet = client.open_by_url(sheet_url).sheet1
     data = sheet.get_all_records()
     df = pd.DataFrame(data)
     return df
 
-# Hiển thị dữ liệu
+# Chuyển dữ liệu thành CSV và lưu vào bộ nhớ tạm thời
+def save_to_csv(df):
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv")
+    df.to_csv(temp_file.name, index=False)
+    return temp_file.name
+
+# Hiển thị dữ liệu với CSS
+def display_with_css(csv_file_path):
+    st.markdown(
+        f"""
+        <style>
+        .dataframe {{
+            border: 2px solid black;
+            border-collapse: collapse;
+            width: 100%;
+        }}
+        .dataframe th, .dataframe td {{
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }}
+        .dataframe th {{
+            background-color: #f2f2f2;
+        }}
+        </style>
+        """, unsafe_allow_html=True
+    )
+    
+    df = pd.read_csv(csv_file_path)
+    st.write(df.to_html(classes='dataframe', index=False), unsafe_allow_html=True)
+
 def main():
     st.title("Google Sheets Data in Streamlit")
     
@@ -27,7 +57,9 @@ def main():
     
     data = load_data()
     
-    st.write(data)
+    csv_file_path = save_to_csv(data)
+    
+    display_with_css(csv_file_path)
 
 if __name__ == "__main__":
     main()
