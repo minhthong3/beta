@@ -41,25 +41,22 @@ st.title("Hiển thị Bảng Dữ liệu từ Google Sheets")
 # URL CSV từ Google Sheets
 google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStRBFjNcpDt-h9MWyZ6DQT_Oq9nv4hCI7tlxS56Pv5vNhq3i45tVvewqxE3sL30F7QfZNwacIxBEJk/pub?gid=0&single=true&output=csv"
 
-@st.experimental_singleton
-def get_data():
-    return pd.read_csv(google_sheet_csv_url)
-
-def apply_highlight(val):
-    if val == 'MUA':
-        return 'background-color: lightgreen'
-    elif val == 'BÁN':
-        return 'background-color: red; color: white'
-    elif val == 'PHÙ HỢP THỊ TRƯỜNG':
-        return 'background-color: lightgreen'
-    else:
-        return ''
-
 try:
     # Đọc tệp CSV từ Google Sheets
-    df = get_data()
+    df = pd.read_csv(google_sheet_csv_url)
 
-    # Áp dụng lớp CSS tùy chỉnh cho các ô có giá trị đặc biệt trong cột "Khuyến nghị"
+    # Thêm lớp CSS tùy chỉnh cho các ô có giá trị đặc biệt trong cột "Khuyến nghị"
+    def apply_highlight(val):
+        if val == 'MUA':
+            return 'background-color: lightgreen'
+        elif val == 'BÁN':
+            return 'background-color: red; color: white'
+        elif val == 'PHÙ HỢP THỊ TRƯỜNG':
+            return 'background-color: lightgreen'
+        else:
+            return ''
+
+    # Áp dụng lớp CSS tùy chỉnh
     df_styled = df.style.applymap(apply_highlight, subset=['Khuyến nghị'])
 
     # Áp dụng CSS tùy chỉnh
@@ -69,8 +66,8 @@ try:
     st.write("Dữ liệu của bạn:")
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
-    # Đặt thời gian chờ 60 giây và tự động làm mới
-    time.sleep(60)
+    # Đặt thời gian chờ 3 giây và tự động làm mới
+    time.sleep(30)
     st.experimental_rerun()
 
 except Exception as e:
