@@ -29,7 +29,7 @@ css = """
         color: white !important;
     }
     .highlight-phuhop {
-        background-color: lightgreen !important;
+        background-color: lightyellow !important;
     }
 </style>
 """
