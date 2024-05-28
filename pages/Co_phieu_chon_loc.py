@@ -63,7 +63,7 @@ try:
     st.markdown(css, unsafe_allow_html=True)
     
     # Hiển thị bảng dữ liệu với định dạng HTML và lớp CSS tùy chỉnh
-    st.write("Dữ liệu của bạn:")
+    st.write("DANH MỤC ĐƯỢC ĐỊNH GIÁ:")
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
     # Đặt thời gian chờ 3 giây và tự động làm mới
