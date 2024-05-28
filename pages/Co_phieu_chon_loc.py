@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # CSS tùy chỉnh cho bảng
 css = """
@@ -29,7 +30,7 @@ css = """
         color: white !important;
     }
     .highlight-phuhop {
-        background-color: lightyellow !important;
+        background-color: lightblue !important;
     }
 </style>
 """
@@ -51,7 +52,7 @@ try:
         elif val == 'BÁN':
             return 'background-color: red; color: white'
         elif val == 'PHÙ HỢP THỊ TRƯỜNG':
-            return 'background-color: lightyellow'
+            return 'background-color: lightblue'
         else:
             return ''
 
@@ -64,6 +65,10 @@ try:
     # Hiển thị bảng dữ liệu với định dạng HTML và lớp CSS tùy chỉnh
     st.write("Dữ liệu của bạn:")
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
+
+    # Đặt thời gian chờ 3 giây và tự động làm mới
+    time.sleep(3)
+    st.experimental_rerun()
 
 except Exception as e:
     st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
