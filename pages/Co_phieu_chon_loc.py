@@ -47,11 +47,11 @@ try:
     # Thêm lớp CSS tùy chỉnh cho các ô có giá trị đặc biệt trong cột "Khuyến nghị"
     def apply_highlight(val):
         if val == 'MUA':
-            return 'background-color: lightgreen'
+            return 'background-color: green'
         elif val == 'BÁN':
             return 'background-color: red; color: white'
         elif val == 'PHÙ HỢP THỊ TRƯỜNG':
-            return 'background-color: lightgreen'
+            return 'background-color: lightyellow'
         else:
             return ''
 
