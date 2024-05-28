@@ -51,9 +51,5 @@ try:
     st.write("Dữ liệu của bạn:")
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
-    # Hiển thị thống kê mô tả với định dạng HTML
-    st.write("Thống kê mô tả:")
-    st.write(df.describe().to_html(classes='dataframe'), unsafe_allow_html=True)
-
 except Exception as e:
     st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
