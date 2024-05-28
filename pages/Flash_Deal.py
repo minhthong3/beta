@@ -63,7 +63,7 @@ def main():
     display_with_css(csv_file_path)
     
     # Tự động làm mới trang sau mỗi 60 giây
-    st_autorefresh(interval=60 * 1000)
+    st_autorefresh(interval=15 * 1000)
 
 if __name__ == "__main__":
     main()
