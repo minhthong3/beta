@@ -22,7 +22,7 @@ css = """
         color: white;
     }
     .highlight-mua {
-        background-color: green !important;
+        background-color: lightgreen !important;
     }
     .highlight-ban {
         background-color: red !important;
@@ -47,7 +47,7 @@ try:
     # Thêm lớp CSS tùy chỉnh cho các ô có giá trị đặc biệt trong cột "Khuyến nghị"
     def apply_highlight(val):
         if val == 'MUA':
-            return 'background-color: green'
+            return 'background-color: lightgreen'
         elif val == 'BÁN':
             return 'background-color: red; color: white'
         elif val == 'PHÙ HỢP THỊ TRƯỜNG':
