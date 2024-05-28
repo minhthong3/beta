@@ -57,8 +57,8 @@ st.markdown(css, unsafe_allow_html=True)
 
 # Hiển thị bảng dữ liệu với định dạng HTML
 st.write("Dữ liệu của bạn:")
-st.write(df.render(), unsafe_allow_html=True)
+st.components.v1.html(df.to_html(classes='dataframe'), height=600, scrolling=True)
 
 # Hiển thị thống kê mô tả với định dạng HTML
 st.write("Thống kê mô tả:")
-st.write(df.data.describe().to_html(classes='dataframe'), unsafe_allow_html=True)
+st.components.v1.html(df.data.describe().to_html(classes='dataframe'), height=600, scrolling=True)
