@@ -5,7 +5,7 @@ import pandas as pd
 st.title("Hiển thị Bảng Dữ liệu từ Google Sheets")
 
 # URL CSV từ Google Sheets
-google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTn8rFdZh3D0fL9_k1VpGflP8OeJlZoEE5tA4ISUwx3u8SdsbJZt9ohSzkEJSI1pxy5Z1iVZjFN5QQZ/pub?output=csv"
+google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/19TRaGNqO9darTuF5_2xCLEqoWOXZpUiTIIQMP1JeiTU/edit?usp=sharing"
 
 try:
     # Đọc tệp CSV từ Google Sheets
