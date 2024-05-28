@@ -22,7 +22,7 @@ css = """
         color: white;
     }
     .highlight-mua {
-        background-color: lightgreen !important;
+        background-color: green !important;
     }
     .highlight-ban {
         background-color: red !important;
