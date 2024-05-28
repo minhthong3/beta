@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -60,6 +61,9 @@ def main():
     csv_file_path = save_to_csv(data)
     
     display_with_css(csv_file_path)
+    
+    # Tự động làm mới trang sau mỗi 60 giây
+    st_autorefresh(interval=60 * 1000)
 
 if __name__ == "__main__":
     main()
