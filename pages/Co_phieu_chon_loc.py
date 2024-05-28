@@ -34,8 +34,20 @@ css = """
         background-color: #4CAF50;
         color: white;
     }
+    .highlight {
+        background-color: lightgreen !important;
+    }
 </style>
 """
+
+# Hàm để áp dụng định dạng có điều kiện
+def highlight_mua(val):
+    color = 'lightgreen' if val == "Mua" else ''
+    return f'background-color: {color}'
+
+# Áp dụng định dạng có điều kiện cho cột "Khuyến nghị"
+if 'Khuyến nghị' in df.columns:
+    df = df.style.applymap(highlight_mua, subset=['Khuyến nghị'])
 
 # Tiêu đề của ứng dụng
 st.title("Hiển thị Bảng Dữ liệu từ Google Sheets")
@@ -49,4 +61,4 @@ st.write(df.to_html(classes='dataframe'), unsafe_allow_html=True)
 
 # Hiển thị thống kê mô tả với định dạng HTML
 st.write("Thống kê mô tả:")
-st.write(df.describe().to_html(classes='dataframe'), unsafe_allow_html=True)
+st.write(df.data.describe().to_html(classes='dataframe'), unsafe_allow_html=True)
