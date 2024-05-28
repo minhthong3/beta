@@ -24,6 +24,13 @@ css = """
     .highlight-mua {
         background-color: lightgreen !important;
     }
+    .highlight-ban {
+        background-color: red !important;
+        color: white !important;
+    }
+    .highlight-phuhop {
+        background-color: lightgreen !important;
+    }
 </style>
 """
 
@@ -37,12 +44,19 @@ try:
     # Đọc tệp CSV từ Google Sheets
     df = pd.read_csv(google_sheet_csv_url)
 
-    # Thêm lớp CSS tùy chỉnh cho các ô có chữ "MUA" trong cột "Khuyến nghị"
+    # Thêm lớp CSS tùy chỉnh cho các ô có giá trị đặc biệt trong cột "Khuyến nghị"
     def apply_highlight(val):
-        return ['background-color: lightgreen' if v == 'MUA' else '' for v in val]
+        if val == 'MUA':
+            return 'background-color: lightgreen'
+        elif val == 'BÁN':
+            return 'background-color: red; color: white'
+        elif val == 'PHÙ HỢP THỊ TRƯỜNG':
+            return 'background-color: lightgreen'
+        else:
+            return ''
 
     # Áp dụng lớp CSS tùy chỉnh
-    df_styled = df.style.apply(apply_highlight, subset=['Khuyến nghị'])
+    df_styled = df.style.applymap(apply_highlight, subset=['Khuyến nghị'])
 
     # Áp dụng CSS tùy chỉnh
     st.markdown(css, unsafe_allow_html=True)
