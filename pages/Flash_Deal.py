@@ -52,8 +52,9 @@ def display_with_css(csv_file_path):
     st.write(df.to_html(classes='dataframe', index=False), unsafe_allow_html=True)
 
 def main():
-    st.title("Google Sheets Data in Streamlit")
-          
+    st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
+    st.write(" Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật)  
+    
     data = load_data()
     
     csv_file_path = save_to_csv(data)
