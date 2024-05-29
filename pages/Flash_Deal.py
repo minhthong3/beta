@@ -46,53 +46,48 @@ def display_with_css(csv_file_path):
         }}
         .dataframe td {{
             background-color: white;  /* Nền màu trắng */
-            color: black;  /* Chữ màu đen */
             border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
             padding: 8px;
             text-align: left;
         }}
-        .dataframe td:nth-child(4) {{
-            color: black;  /* Đặt màu mặc định cho cột +/- % */
+        .dataframe td.tin_hieu {{
+            color: black;
         }}
-        .dataframe td:nth-child(4):after {{
-            content: "%";
-        }}
-        .dataframe td:nth-child(4):not(:empty):before {{
-            content: attr(data-value);
-            display: none;
-        }}
-        .dataframe td:nth-child(4) {{
-            text-align: right;
-        }}
-        .dataframe td[data-value^="-"] {{
-            color: red;  /* Màu đỏ cho giá trị âm */
-        }}
-        .dataframe td[data-value^="-"]:after {{
-            color: red;  /* Màu đỏ cho dấu âm */
-        }}
-        .dataframe td[data-value^="-"]:not(:empty):before {{
-            color: red;  /* Màu đỏ cho giá trị âm */
-        }}
-        .dataframe td[data-value]:not([data-value^="-"]) {{
-            color: green;  /* Màu xanh lá cây cho giá trị dương */
-        }}
-        .dataframe td[data-value]:not([data-value^="-"]):after {{
-            color: green;  /* Màu xanh lá cây cho giá trị dương */
-        }}
-        .dataframe td[data-value]:not([data-value^="-"]):not(:empty):before {{
-            color: green;  /* Màu xanh lá cây cho giá trị dương */
-        }}
-        .dataframe td:nth-child(5):after {{
-            content: attr(data-value);
-        }}
-        .dataframe td:nth-child(5) {{
-            text-align: center;
-        }}
-        .dataframe td[data-value="MUA"] {{
+        .dataframe td.tin_hieu[data-value="MUA"] {{
             color: green;  /* Màu xanh lá cây cho "MUA" */
         }}
-        .dataframe td[data-value="BÁN"] {{
+        .dataframe td.tin_hieu[data-value="BÁN"] {{
             color: red;  /* Màu đỏ cho "BÁN" */
+        }}
+        .dataframe td.gia_hien_tai {{
+            color: black;
+        }}
+        .dataframe td.gia_hien_tai[data-percent-value^="-"] {{
+            color: red;  /* Màu đỏ cho giá trị âm */
+        }}
+        .dataframe td.gia_hien_tai[data-percent-value="0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .dataframe td.gia_hien_tai[data-percent-value^="0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .dataframe td.gia_hien_tai[data-percent-value] {{
+            color: green;  /* Màu xanh lá cây cho giá trị dương */
+        }}
+        .dataframe td.percent {{
+            color: black;
+        }}
+        .dataframe td.percent[data-value^="-"] {{
+            color: red;  /* Màu đỏ cho giá trị âm */
+        }}
+        .dataframe td.percent[data-value="0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .dataframe td.percent[data-value^="0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .dataframe td.percent[data-value] {{
+            color: green;  /* Màu xanh lá cây cho giá trị dương */
         }}
         </style>
         """, unsafe_allow_html=True
@@ -102,9 +97,11 @@ def display_with_css(csv_file_path):
     # Thay thế NaN bằng chuỗi trắng trong cột "Tín hiệu"
     if 'Tín hiệu' in df.columns:
         df['Tín hiệu'] = df['Tín hiệu'].fillna('')
-    # Định dạng các cột +/- % và Tín hiệu
-    df['+/- %'] = df['+/- %'].apply(lambda x: f'<td data-value="{x}">{x}</td>')
-    df['Tín hiệu'] = df['Tín hiệu'].apply(lambda x: f'<td data-value="{x}">{x}</td>')
+    # Tạo HTML cho các cột
+    df['+/- %'] = df['+/- %'].apply(lambda x: f'<td class="percent" data-value="{x}">{x}</td>')
+    df['Tín hiệu'] = df['Tín hiệu'].apply(lambda x: f'<td class="tin_hieu" data-value="{x}">{x}</td>')
+    df['Giá hiện tại'] = df.apply(lambda row: f'<td class="gia_hien_tai" data-percent-value="{row["+/- %"]}">{row["Giá hiện tại"]}</td>', axis=1)
+    
     st.write(df.to_html(classes='dataframe', index=False, escape=False), unsafe_allow_html=True)
 
 def main():
