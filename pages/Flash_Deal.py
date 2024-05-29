@@ -27,7 +27,7 @@ def save_to_csv(df):
     return temp_file.name
 
 # Hiển thị dữ liệu với CSS
-def display_with_css(csv_file_path):
+def display_with_css(df):
     st.markdown(
         f"""
         <style>
@@ -93,16 +93,27 @@ def display_with_css(csv_file_path):
         """, unsafe_allow_html=True
     )
     
-    df = pd.read_csv(csv_file_path)
-    # Thay thế NaN bằng chuỗi trắng trong cột "Tín hiệu"
-    if 'Tín hiệu' in df.columns:
-        df['Tín hiệu'] = df['Tín hiệu'].fillna('')
-    # Tạo HTML cho các cột
-    df['+/- %'] = df['+/- %'].apply(lambda x: f'<td class="percent" data-value="{x}">{x}</td>')
-    df['Tín hiệu'] = df['Tín hiệu'].apply(lambda x: f'<td class="tin_hieu" data-value="{x}">{x}</td>')
-    df['Giá hiện tại'] = df.apply(lambda row: f'<td class="gia_hien_tai" data-percent-value="{row["+/- %"]}">{row["Giá hiện tại"]}</td>', axis=1)
-    
-    st.write(df.to_html(classes='dataframe', index=False, escape=False), unsafe_allow_html=True)
+    # Sử dụng to_html với các class cụ thể cho các cột
+    def format_value(val, class_name):
+        return f'<td class="{class_name}" data-value="{val}">{val}</td>'
+
+    def format_row(row):
+        return [
+            row["Mã"],
+            format_value(row["Tín hiệu"], "tin_hieu"),
+            format_value(row["Giá hiện tại"], "gia_hien_tai"),
+            format_value(row["+/- %"], "percent")
+        ]
+
+    formatted_rows = [format_row(row) for _, row in df.iterrows()]
+    html = "<table class='dataframe'>"
+    html += "<thead><tr>" + "".join([f"<th>{col}</th>" for col in df.columns]) + "</tr></thead>"
+    html += "<tbody>"
+    for row in formatted_rows:
+        html += "<tr>" + "".join(row) + "</tr>"
+    html += "</tbody></table>"
+
+    st.markdown(html, unsafe_allow_html=True)
 
 def main():
     # Cấu hình trang web với chế độ wide mode
@@ -115,9 +126,7 @@ def main():
     
     data = load_data()
     
-    csv_file_path = save_to_csv(data)
-    
-    display_with_css(csv_file_path)
+    display_with_css(data)
     
     # Tự động làm mới trang sau mỗi 10 giây
     st_autorefresh(interval=10 * 1000)
