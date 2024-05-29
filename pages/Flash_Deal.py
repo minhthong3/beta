@@ -31,10 +31,19 @@ def display_with_css(csv_file_path):
     st.markdown(
         f"""
         <style>
-        .dataframe {{
-            border: 2px solid black;
+        table {{
+            width: 80%;
             border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }}
+        .dataframe {{
             width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }}
         .dataframe th, .dataframe td {{
             border: 1px solid black;
