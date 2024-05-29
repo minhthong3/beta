@@ -68,7 +68,7 @@ try:
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
     # Tự động làm mới trang sau mỗi 10 giây
-    st_autorefresh(interval=50 * 1000)
+    st_autorefresh(interval=3600 * 1000)
 
 except Exception as e:
     st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
