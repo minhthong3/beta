@@ -58,10 +58,16 @@ def display_with_css(df):
         .gia_hien_tai[data-percent-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
+        .gia_hien_tai[data-percent-value="0.0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
         .gia_hien_tai[data-percent-value="0"] {{
             color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
-        .gia_hien_tai[data-percent-value^="0."] {{
+        .gia_hien_tai[data-percent-value="0.00"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .gia_hien_tai[data-percent-value]:not([data-percent-value^="-"]):not([data-percent-value="0"]):not([data-percent-value="0.0"]):not([data-percent-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
         }}
         .percent {{
@@ -70,10 +76,16 @@ def display_with_css(df):
         .percent[data-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
+        .percent[data-value="0.0"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
         .percent[data-value="0"] {{
             color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
-        .percent[data-value^="0."] {{
+        .percent[data-value="0.00"] {{
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+        }}
+        .percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
         }}
         </style>
@@ -89,11 +101,11 @@ def display_with_css(df):
         percent_value = row["+/- %"]
         gia_hien_tai_color_class = ""
         if percent_value > 0:
-            gia_hien_tai_color_class = "gia_hien_tai green"
+            gia_hien_tai_color_class = "gia_hien_tai"
         elif percent_value < 0:
-            gia_hien_tai_color_class = "gia_hien_tai red"
+            gia_hien_tai_color_class = "gia_hien_tai"
         else:
-            gia_hien_tai_color_class = "gia_hien_tai yellow"
+            gia_hien_tai_color_class = "gia_hien_tai"
         
         return [
             f'<td>{row["Mã"]}</td>',
