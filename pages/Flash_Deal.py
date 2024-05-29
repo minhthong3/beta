@@ -77,13 +77,13 @@ def display_with_css(df):
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
         .percent[data-value="0.0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .percent[data-value="0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .percent[data-value="0.00"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
