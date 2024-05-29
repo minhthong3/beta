@@ -58,14 +58,10 @@ def display_with_css(df):
         .gia_hien_tai[data-percent-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
-        .gia_hien_tai[data-percent-value="0.0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .gia_hien_tai[data-percent-value="0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
+        .gia_hien_tai[data-percent-value="0.0"],
+        .gia_hien_tai[data-percent-value="0"],
         .gia_hien_tai[data-percent-value="0.00"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .gia_hien_tai[data-percent-value]:not([data-percent-value^="-"]):not([data-percent-value="0"]):not([data-percent-value="0.0"]):not([data-percent-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
@@ -76,14 +72,10 @@ def display_with_css(df):
         .percent[data-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
-        .percent[data-value="0.0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .percent[data-value="0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
+        .percent[data-value="0.0"],
+        .percent[data-value="0"],
         .percent[data-value="0.00"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
+            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
@@ -130,11 +122,30 @@ def main():
     
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
     st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
-    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
-
+    st.write("Tín hiệu khuyến nghị thời gian thực - Cập nhật 10 giây một lần")  
+    st.write("Từ 9h15 đến 15h00 dữ liệu được cập nhật liên tục trong phiên giao dịch.")
+    
     data = load_data()
     
-    display_with_css(data)
+    # Thêm các bộ lọc
+    ma_filter = st.sidebar.multiselect('Chọn Mã', options=data['Mã'].unique(), default=data['Mã'].unique())
+    tin_hieu_filter = st.sidebar.multiselect('Chọn Tín hiệu', options=data['Tín hiệu'].unique(), default=data['Tín hiệu'].unique())
+    gia_hien_tai_min = st.sidebar.number_input('Giá hiện tại (tối thiểu)', min_value=float(data['Giá hiện tại'].min()), max_value=float(data['Giá hiện tại'].max()), value=float(data['Giá hiện tại'].min()))
+    gia_hien_tai_max = st.sidebar.number_input('Giá hiện tại (tối đa)', min_value=float(data['Giá hiện tại'].min()), max_value=float(data['Giá hiện tại'].max()), value=float(data['Giá hiện tại'].max()))
+    percent_min = st.sidebar.number_input('+/- % (tối thiểu)', min_value=float(data['+/- %'].min()), max_value=float(data['+/- %'].max()), value=float(data['+/- %'].min()))
+    percent_max = st.sidebar.number_input('+/- % (tối đa)', min_value=float(data['+/- %'].min()), max_value=float(data['+/- %'].max()), value=float(data['+/- %'].max()))
+
+    # Áp dụng các bộ lọc
+    filtered_data = data[
+        (data['Mã'].isin(ma_filter)) &
+        (data['Tín hiệu'].isin(tin_hieu_filter)) &
+        (data['Giá hiện tại'] >= gia_hien_tai_min) &
+        (data['Giá hiện tại'] <= gia_hien_tai_max) &
+        (data['+/- %'] >= percent_min) &
+        (data['+/- %'] <= percent_max)
+    ]
+    
+    display_with_css(filtered_data)
     
     # Tự động làm mới trang sau mỗi 10 giây
     st_autorefresh(interval=10 * 1000)
