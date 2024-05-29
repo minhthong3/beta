@@ -42,7 +42,7 @@ def display_with_css(csv_file_path):
             text-align: left;
         }}
         .dataframe th {{
-            background-color: #f2f2f2;
+            background-color: #00ff00;  /* Màu xanh lá cây cho hàng tiêu đề */
         }}
         </style>
         """, unsafe_allow_html=True
@@ -57,10 +57,11 @@ def display_with_css(csv_file_path):
 def main():
     # Cấu hình trang web với chế độ wide mode
     st.set_page_config(layout="wide")
+    
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
-    st.write(" Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
-    st.write(" Tín hiệu khuyến nghị thời gian thực - Cập nhật 10 giây một lần")  
-    st.write(" Từ 9h15 đến 15h00 dữ liệu được cập nhật liên tục trong phiên giao dịch. ")
+    st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
+    st.write("Tín hiệu khuyến nghị thời gian thực - Cập nhật 10 giây một lần")  
+    st.write("Từ 9h15 đến 15h00 dữ liệu được cập nhật liên tục trong phiên giao dịch.")
     
     data = load_data()
     
@@ -68,7 +69,7 @@ def main():
     
     display_with_css(csv_file_path)
     
-    # Tự động làm mới trang sau mỗi 60 giây
+    # Tự động làm mới trang sau mỗi 10 giây
     st_autorefresh(interval=10 * 1000)
 
 if __name__ == "__main__":
