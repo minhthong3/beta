@@ -49,6 +49,9 @@ def display_with_css(csv_file_path):
     )
     
     df = pd.read_csv(csv_file_path)
+    # Thay thế NaN bằng chuỗi trắng trong cột "Tín hiệu"
+    if 'Tín hiệu' in df.columns:
+        df['Tín hiệu'] = df['Tín hiệu'].fillna('')
     st.write(df.to_html(classes='dataframe', index=False), unsafe_allow_html=True)
 
 def main():
