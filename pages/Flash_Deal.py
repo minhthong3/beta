@@ -3,7 +3,6 @@ from streamlit_autorefresh import st_autorefresh
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import tempfile
 
 # Cấu hình xác thực
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -20,12 +19,6 @@ def load_data():
     df = pd.DataFrame(data)
     return df
 
-# Chuyển dữ liệu thành CSV và lưu vào bộ nhớ tạm thời
-def save_to_csv(df):
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv")
-    df.to_csv(temp_file.name, index=False)
-    return temp_file.name
-
 # Hiển thị dữ liệu với CSS
 def display_with_css(df):
     st.markdown(
@@ -38,68 +31,62 @@ def display_with_css(df):
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }}
-        .dataframe th {{
+        th {{
             background-color: orange;  /* Nền màu cam cho tiêu đề */
             color: white;  /* Chữ màu trắng */
             text-align: center;  /* Văn bản căn giữa */
             border: 1px solid white;  /* Đường viền màu trắng */
         }}
-        .dataframe td {{
+        td {{
             background-color: white;  /* Nền màu trắng */
             border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
             padding: 8px;
             text-align: left;
         }}
-        .dataframe td.tin_hieu {{
+        .tin_hieu {{
             color: black;
         }}
-        .dataframe td.tin_hieu[data-value="MUA"] {{
+        .tin_hieu[data-value="MUA"] {{
             color: green;  /* Màu xanh lá cây cho "MUA" */
         }}
-        .dataframe td.tin_hieu[data-value="BÁN"] {{
+        .tin_hieu[data-value="BÁN"] {{
             color: red;  /* Màu đỏ cho "BÁN" */
         }}
-        .dataframe td.gia_hien_tai {{
+        .gia_hien_tai {{
             color: black;
         }}
-        .dataframe td.gia_hien_tai[data-percent-value^="-"] {{
+        .gia_hien_tai[data-percent-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
-        .dataframe td.gia_hien_tai[data-percent-value="0"] {{
+        .gia_hien_tai[data-percent-value="0"] {{
             color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
-        .dataframe td.gia_hien_tai[data-percent-value^="0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .dataframe td.gia_hien_tai[data-percent-value] {{
+        .gia_hien_tai[data-percent-value] {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
         }}
-        .dataframe td.percent {{
+        .percent {{
             color: black;
         }}
-        .dataframe td.percent[data-value^="-"] {{
+        .percent[data-value^="-"] {{
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
-        .dataframe td.percent[data-value="0"] {{
+        .percent[data-value="0"] {{
             color: yellow;  /* Màu vàng cho giá trị bằng 0 */
         }}
-        .dataframe td.percent[data-value^="0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .dataframe td.percent[data-value] {{
+        .percent[data-value] {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
         }}
         </style>
         """, unsafe_allow_html=True
     )
-    
-    # Sử dụng to_html với các class cụ thể cho các cột
+
+    # Tạo HTML cho các cột
     def format_value(val, class_name):
         return f'<td class="{class_name}" data-value="{val}">{val}</td>'
 
     def format_row(row):
         return [
-            row["Mã"],
+            f'<td>{row["Mã"]}</td>',
             format_value(row["Tín hiệu"], "tin_hieu"),
             format_value(row["Giá hiện tại"], "gia_hien_tai"),
             format_value(row["+/- %"], "percent")
@@ -107,7 +94,7 @@ def display_with_css(df):
 
     formatted_rows = [format_row(row) for _, row in df.iterrows()]
     html = "<table class='dataframe'>"
-    html += "<thead><tr>" + "".join([f"<th>{col}</th>" for col in df.columns]) + "</tr></thead>"
+    html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>+/- %</th></tr></thead>"
     html += "<tbody>"
     for row in formatted_rows:
         html += "<tr>" + "".join(row) + "</tr>"
