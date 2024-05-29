@@ -130,7 +130,7 @@ def main():
     
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
     st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
-    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được pập nhật 10 giây một lần từ 9h15 đến 15h00")  
+    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
 
     data = load_data()
     
