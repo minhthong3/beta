@@ -25,7 +25,7 @@ def display_with_css(df):
         f"""
         <style>
         table {{
-            width: 90%;
+            width: 100%;
             border-collapse: collapse;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
