@@ -19,8 +19,22 @@ def load_data():
     df = pd.DataFrame(data)
     return df
 
-# Hiển thị dữ liệu với CSS
-def display_with_css(df):
+# Xử lý sự kiện sắp xếp
+def handle_sort(column):
+    if st.session_state['sort_column'] == column:
+        st.session_state['sort_ascending'] = not st.session_state['sort_ascending']
+    else:
+        st.session_state['sort_column'] = column
+        st.session_state['sort_ascending'] = True
+
+# Hiển thị dữ liệu với CSS và tính năng sort
+def display_with_css_and_sort(df):
+    sort_column = st.session_state.get('sort_column', None)
+    sort_ascending = st.session_state.get('sort_ascending', True)
+    
+    if sort_column:
+        df = df.sort_values(by=sort_column, ascending=sort_ascending)
+
     st.markdown(
         f"""
         <style>
@@ -36,6 +50,7 @@ def display_with_css(df):
             color: white;  /* Chữ màu trắng */
             text-align: center;  /* Văn bản căn giữa */
             border: 1px solid white;  /* Đường viền màu trắng */
+            cursor: pointer;
         }}
         td {{
             background-color: white;  /* Nền màu trắng */
@@ -108,13 +123,32 @@ def display_with_css(df):
 
     formatted_rows = [format_row(row) for _, row in df.iterrows()]
     html = "<table class='dataframe'>"
-    html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>+/- %</th></tr></thead>"
+    html += "<thead><tr>"
+    for col in df.columns:
+        html += f'<th onclick="window.location.href=\'#{col}\'">{col}</th>'
+    html += "</tr></thead>"
     html += "<tbody>"
     for row in formatted_rows:
         html += "<tr>" + "".join(row) + "</tr>"
     html += "</tbody></table>"
 
     st.markdown(html, unsafe_allow_html=True)
+
+# Đặt các giá trị mặc định cho session_state nếu chưa có
+if 'sort_column' not in st.session_state:
+    st.session_state['sort_column'] = None
+if 'sort_ascending' not in st.session_state:
+    st.session_state['sort_ascending'] = True
+
+# Gọi hàm handle_sort khi nhấn vào tiêu đề cột
+if st.button('Mã'):
+    handle_sort('Mã')
+if st.button('Tín hiệu'):
+    handle_sort('Tín hiệu')
+if st.button('Giá hiện tại'):
+    handle_sort('Giá hiện tại')
+if st.button('+/- %'):
+    handle_sort('+/- %')
 
 def main():
     # Cấu hình trang web với chế độ wide mode
@@ -127,25 +161,7 @@ def main():
     
     data = load_data()
     
-    # Thêm các bộ lọc
-    ma_filter = st.sidebar.multiselect('Chọn Mã', options=data['Mã'].unique(), default=data['Mã'].unique())
-    tin_hieu_filter = st.sidebar.multiselect('Chọn Tín hiệu', options=data['Tín hiệu'].unique(), default=data['Tín hiệu'].unique())
-    gia_hien_tai_min = st.sidebar.number_input('Giá hiện tại (tối thiểu)', min_value=float(data['Giá hiện tại'].min()), max_value=float(data['Giá hiện tại'].max()), value=float(data['Giá hiện tại'].min()))
-    gia_hien_tai_max = st.sidebar.number_input('Giá hiện tại (tối đa)', min_value=float(data['Giá hiện tại'].min()), max_value=float(data['Giá hiện tại'].max()), value=float(data['Giá hiện tại'].max()))
-    percent_min = st.sidebar.number_input('+/- % (tối thiểu)', min_value=float(data['+/- %'].min()), max_value=float(data['+/- %'].max()), value=float(data['+/- %'].min()))
-    percent_max = st.sidebar.number_input('+/- % (tối đa)', min_value=float(data['+/- %'].min()), max_value=float(data['+/- %'].max()), value=float(data['+/- %'].max()))
-
-    # Áp dụng các bộ lọc
-    filtered_data = data[
-        (data['Mã'].isin(ma_filter)) &
-        (data['Tín hiệu'].isin(tin_hieu_filter)) &
-        (data['Giá hiện tại'] >= gia_hien_tai_min) &
-        (data['Giá hiện tại'] <= gia_hien_tai_max) &
-        (data['+/- %'] >= percent_min) &
-        (data['+/- %'] <= percent_max)
-    ]
-    
-    display_with_css(filtered_data)
+    display_with_css_and_sort(data)
     
     # Tự động làm mới trang sau mỗi 10 giây
     st_autorefresh(interval=10 * 1000)
