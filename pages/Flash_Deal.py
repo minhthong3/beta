@@ -59,13 +59,13 @@ def display_with_css(df):
             color: red;  /* Màu đỏ cho giá trị âm */
         }}
         .gia_hien_tai[data-percent-value="0.0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .gia_hien_tai[data-percent-value="0"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .gia_hien_tai[data-percent-value="0.00"] {{
-            color: yellow;  /* Màu vàng cho giá trị bằng 0 */
+            color: orange;  /* Màu vàng cho giá trị bằng 0 */
         }}
         .gia_hien_tai[data-percent-value]:not([data-percent-value^="-"]):not([data-percent-value="0"]):not([data-percent-value="0.0"]):not([data-percent-value="0.00"]) {{
             color: green;  /* Màu xanh lá cây cho giá trị dương */
