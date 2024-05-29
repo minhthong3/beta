@@ -66,8 +66,8 @@ try:
     st.write("DANH MỤC ĐƯỢC ĐỊNH GIÁ:")
     st.write(df_styled.to_html(escape=False), unsafe_allow_html=True)
 
-    # Đặt thời gian chờ 3 giây và tự động làm mới
-
+    # Tự động làm mới trang sau mỗi 10 giây
+    st_autorefresh(interval=20 * 1000)
 
 except Exception as e:
     st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
