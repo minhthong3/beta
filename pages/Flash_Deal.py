@@ -55,6 +55,8 @@ def display_with_css(csv_file_path):
     st.write(df.to_html(classes='dataframe', index=False), unsafe_allow_html=True)
 
 def main():
+    # Cấu hình trang web với chế độ wide mode
+    st.set_page_config(layout="wide")
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
     st.write(" Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
     st.write(" Tín hiệu khuyến nghị thời gian thực - Cập nhật 10 giây một lần")  
