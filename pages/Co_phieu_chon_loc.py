@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import time
+from streamlit_autorefresh import st_autorefresh
 
 # CSS tùy chỉnh cho bảng
 css = """
