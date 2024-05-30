@@ -9,7 +9,7 @@ st.title("GoodStock")
 google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStRBFjNcpDt-h9MWyZ6DQT_Oq9nv4hCI7tlxS56Pv5vNhq3i45tVvewqxE3sL30F7QfZNwacIxBEJk/pub?gid=0&single=true&output=csv"
 
 # Tạo các tab
-tab1, tab2 = st.tabs(["Dữ liệu", "Tab Trống"])
+tab1, tab2 = st.tabs(["Khuyến nghị", "Hướng dẫn"])
 
 with tab1:
     # CSS tùy chỉnh cho bảng
