@@ -37,7 +37,7 @@ css = """
 """
 
 # Tiêu đề của ứng dụng
-st.title("Cổ phiếu chọn lọc")
+st.title("GoodStock")
 
 # URL CSV từ Google Sheets
 google_sheet_csv_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStRBFjNcpDt-h9MWyZ6DQT_Oq9nv4hCI7tlxS56Pv5vNhq3i45tVvewqxE3sL30F7QfZNwacIxBEJk/pub?gid=0&single=true&output=csv"
