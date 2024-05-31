@@ -9,7 +9,7 @@ pages = ["Home", "Documentation", "Examples", "Community", "About"]
 styles = {
     "nav": {"background-color": "rgb(123, 209, 146)"},
     "div": {
-        "max-width": "100%",  # Ensure the div takes up all the available width on smaller screens
+        "max-width": "50%",  # Ensure the div takes up all the available width on smaller screens
         "margin": "auto"  # Center the content
     },
     "span": {
