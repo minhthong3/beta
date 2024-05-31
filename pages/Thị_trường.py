@@ -7,21 +7,28 @@ st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="colla
 # Define the pages and custom styles for the navigation bar
 pages = ["Home", "Documentation", "Examples", "Community", "About"]
 styles = {
-    "nav": {"background-color": "rgb(123, 209, 146)"},
+    "nav": {
+        "background-color": "rgb(123, 209, 146)",
+        "width": "100%",  # Ensuring the nav takes the full width
+    },
     "div": {
-        "max-width": "40%",  # Ensure the div takes up all the available width on smaller screens
-        "margin": "auto"  # Center the content
+        "width": "100%",  # Allow the div to expand fully on smaller screens
+        "margin": "auto"
     },
     "span": {
         "border-radius": "0.5rem",
         "color": "rgb(49, 51, 63)",
         "margin": "0 0.125rem",
         "padding": "0.4375rem 0.625rem",
-        "display": "inline-block",  # Ensure that text aligns well on smaller screens
+        "display": "inline-block",
         "white-space": "nowrap"
     },
-    "active": {"background-color": "rgba(255, 255, 255, 0.25)"},
-    "hover": {"background-color": "rgba(255, 255, 255, 0.35)"},
+    "active": {
+        "background-color": "rgba(255, 255, 255, 0.25)"
+    },
+    "hover": {
+        "background-color": "rgba(255, 255, 255, 0.35)"
+    },
 }
 
 # Implement navigation bar and get the currently selected page
