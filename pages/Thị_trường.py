@@ -9,10 +9,10 @@ pages = ["Home", "Documentation", "Examples", "Community", "About"]
 styles = {
     "nav": {
         "background-color": "rgb(123, 209, 146)",
-        "width": "100%",  # Ensuring the nav takes the full width
+        "width": "100%",
     },
     "div": {
-        "width": "100%",  # Allow the div to expand fully on smaller screens
+        "width": "100%",
         "margin": "auto"
     },
     "span": {
@@ -21,7 +21,8 @@ styles = {
         "margin": "0 0.125rem",
         "padding": "0.4375rem 0.625rem",
         "display": "inline-block",
-        "white-space": "nowrap"
+        "white-space": "nowrap",
+        "font-size": "16px"
     },
     "active": {
         "background-color": "rgba(255, 255, 255, 0.25)"
@@ -34,7 +35,7 @@ styles = {
 # Implement navigation bar and get the currently selected page
 selected_page = st_navbar(pages, styles=styles)
 
-# Define the content for each page
+# Define the content for each page and display it
 def home():
     st.title("Home")
     st.write("Welcome to the home page!")
@@ -55,7 +56,6 @@ def about():
     st.title("About")
     st.write("Learn more about our project.")
 
-# Display the content based on the selected page
 if selected_page == "Home":
     home()
 elif selected_page == "Documentation":
