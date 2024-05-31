@@ -18,11 +18,11 @@ styles = {
     "span": {
         "border-radius": "0.5rem",
         "color": "rgb(49, 51, 63)",
-        "margin": "0 0.05rem",
-        "padding": "0.2375rem 0.325rem",
+        "margin": "0 0.025rem",
+        "padding": "0.1rem 0.2rem",
         "display": "inline-block",
         "white-space": "nowrap",
-        "font-size": "12px"
+        "font-size": "14px"
     },
     "active": {
         "background-color": "rgba(255, 255, 255, 0.25)"
