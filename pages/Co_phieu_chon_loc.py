@@ -78,52 +78,46 @@ with tab1:
 
 with tab2:
     from streamlit_option_menu import option_menu
+    from streamlit_navigation_bar import navigation_bar
     
-    # Cho phép sử dụng CSS trong Streamlit
-    def local_css(file_name):
-        with open(file_name) as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    # Tạo các trang cho mỗi phần của thanh điều hướng
+    def home():
+        st.title("Home")
+        st.write("Welcome to the home page!")
     
-    # Gọi hàm với đường dẫn chính xác, chú ý đến khoảng trắng trong tên thư mục
-    local_css("css library/style.css")
-
+    def documentation():
+        st.title("Documentation")
+        st.write("Here you can find all the documentation.")
     
-    # Tạo thanh menu tab
-    selected = option_menu(
-    menu_title=None,  # Không tiêu đề cho menu
-    options=["Home", "GoodStock Analysis","Home"],  # Tên các tab
-    icons=["house", "graph-up-arrow", "graph-up-arrow"],  # Icons cho từng tab
-    menu_icon="cast",  # Icon cho menu
-    default_index=1,  # Mặc định chọn tab "GoodStock Analysis"
-    orientation="horizontal"
+    def examples():
+        st.title("Examples")
+        st.write("Check out these cool examples.")
+    
+    def community():
+        st.title("Community")
+        st.write("Join our vibrant community!")
+    
+    def about():
+        st.title("About")
+        st.write("Learn more about our project.")
+    
+    # Thiết lập thanh điều hướng
+    selected = navigation_bar(
+        menu_title="Main Navigation",
+        options=["Home", "Documentation", "Examples", "Community", "About"],
+        icons=["house", "book", "app-indicator", "people", "info-circle"],
+        menu_icon="cast",
+        orientation="horizontal"
     )
     
-    if selected == "GoodStock Analysis":
-        # Nội dung cho tab "GoodStock Analysis"
-        st.markdown("""
-        <div class="content">
-            <h1>GoodStock - Cổ phiếu tiềm năng</h1>
-            <h2>Phương pháp – Triết lý đầu tư</h2>
-            <p>GoodStock cung cấp dự báo và khuyến nghị đối với các cổ phiếu bị định giá thấp so với giá trị thực của chúng.
-            GoodStock sử dụng phân tích cơ bản để đánh giá tình hình tài chính, hiệu suất kinh doanh, và triển vọng của công ty có xét đến yếu tố vĩ mô ảnh hưởng đến ngành, doanh nghiệp, đồng thời áp dụng các phương pháp định giá để xác định giá trị thực của cổ phiếu so với giá thị trường.</p>
-            
-            <h2>Nhà đầu tư phù hợp với Cổ phiếu tiềm năng</h2>
-            <ul>
-                <li>Không có nhiều thời gian để theo dõi thị trường</li>
-                <li>Tập trung tiềm năng tăng trưởng dài hạn của công ty, tìm kiếm lợi nhuận bền vững và tránh rủi ro không cần thiết</li>
-                <li>Chiến lược giao giao dịch trung-dài hạn (từ 1-2 năm)</li>
-                <li>Không chuyên hoặc mới tham gia thị trường</li>
-            </ul>
-            
-            <h2>Hệ thống khuyến nghị của GoodStock</h2>
-            <p>Khuyến nghị được đưa ra dựa trên mức tăng/giảm của giá cổ phiếu để đạt đến giá mục tiêu, được xác định bằng công thức (giá mục tiêu - giá hiện tại)/giá hiện tại</p>
-            <ul>
-                <li>MUA: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ trên 20%</li>
-                <li>KHẢ QUAN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ dương từ 10%-20%</li>
-                <li>PHÙ HỢP THỊ TRƯỜNG: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ dao động trong khoảng âm 10% và dương 10%</li>
-                <li>KÉM KHÁ QUAN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ âm từ 10%-20%</li>
-                <li>BÁN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ âm trên 20%</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-
+    # Logic để hiển thị nội dung dựa trên lựa chọn của người dùng
+    if selected == "Home":
+        home()
+    elif selected == "Documentation":
+        documentation()
+    elif selected == "Examples":
+        examples()
+    elif selected == "Community":
+        community()
+    elif selected == "About":
+        about()
