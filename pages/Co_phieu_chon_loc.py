@@ -77,4 +77,50 @@ with tab1:
         st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
 
 with tab2:
-    st.write("Nội dung tab thứ hai hiện đang để trống.")
+    from streamlit_option_menu import option_menu
+    
+    # Cho phép sử dụng CSS trong Streamlit
+    def local_css(file_name):
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    
+    local_css("style.css")  # Tạo file style.css trong cùng thư mục hoặc thay đổi đường dẫn tương ứng
+    
+    # Tạo thanh menu tab
+    selected = option_menu(
+        menu_title=None,  # Không tiêu đề cho menu
+        options=["Home", "GoodStock Analysis"],  # Tên các tab
+        icons=["house", "graph-up-arrow"],  # Icons cho từng tab
+        menu_icon="cast",  # Icon cho menu
+        default_index=1  # Mặc định chọn tab "GoodStock Analysis"
+    )
+    
+    if selected == "GoodStock Analysis":
+        # Nội dung cho tab "GoodStock Analysis"
+        st.markdown("""
+        <div class="content">
+            <h1>GoodStock - Cổ phiếu tiềm năng</h1>
+            <h2>Phương pháp – Triết lý đầu tư</h2>
+            <p>GoodStock cung cấp dự báo và khuyến nghị đối với các cổ phiếu bị định giá thấp so với giá trị thực của chúng.
+            GoodStock sử dụng phân tích cơ bản để đánh giá tình hình tài chính, hiệu suất kinh doanh, và triển vọng của công ty có xét đến yếu tố vĩ mô ảnh hưởng đến ngành, doanh nghiệp, đồng thời áp dụng các phương pháp định giá để xác định giá trị thực của cổ phiếu so với giá thị trường.</p>
+            
+            <h2>Nhà đầu tư phù hợp với Cổ phiếu tiềm năng</h2>
+            <ul>
+                <li>Không có nhiều thời gian để theo dõi thị trường</li>
+                <li>Tập trung tiềm năng tăng trưởng dài hạn của công ty, tìm kiếm lợi nhuận bền vững và tránh rủi ro không cần thiết</li>
+                <li>Chiến lược giao giao dịch trung-dài hạn (từ 1-2 năm)</li>
+                <li>Không chuyên hoặc mới tham gia thị trường</li>
+            </ul>
+            
+            <h2>Hệ thống khuyến nghị của GoodStock</h2>
+            <p>Khuyến nghị được đưa ra dựa trên mức tăng/giảm của giá cổ phiếu để đạt đến giá mục tiêu, được xác định bằng công thức (giá mục tiêu - giá hiện tại)/giá hiện tại</p>
+            <ul>
+                <li>MUA: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ trên 20%</li>
+                <li>KHẢ QUAN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ dương từ 10%-20%</li>
+                <li>PHÙ HỢP THỊ TRƯỜNG: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ dao động trong khoảng âm 10% và dương 10%</li>
+                <li>KÉM KHÁ QUAN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ âm từ 10%-20%</li>
+                <li>BÁN: lợi nhuận (bao gồm cổ tức) trong 12 tháng tới dự báo sẽ âm trên 20%</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
