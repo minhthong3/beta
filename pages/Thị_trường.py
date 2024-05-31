@@ -22,7 +22,7 @@ styles = {
         "padding": "0.4375rem 0.625rem",
         "display": "inline-block",
         "white-space": "nowrap",
-        "font-size": "16px"
+        "font-size": "12px"
     },
     "active": {
         "background-color": "rgba(255, 255, 255, 0.25)"
