@@ -77,46 +77,26 @@ with tab1:
         st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
 
 with tab2:
-    from streamlit_navigation_bar import navigation_bar
-    
-    # Tạo các trang cho mỗi phần của thanh điều hướng
-    def home():
-        st.title("Home")
-        st.write("Welcome to the home page!")
-    
-    def documentation():
-        st.title("Documentation")
-        st.write("Here you can find all the documentation.")
-    
-    def examples():
-        st.title("Examples")
-        st.write("Check out these cool examples.")
-    
-    def community():
-        st.title("Community")
-        st.write("Join our vibrant community!")
-    
-    def about():
-        st.title("About")
-        st.write("Learn more about our project.")
-    
-    # Thiết lập thanh điều hướng
-    selected = navigation_bar(
+    # Using option_menu for navigation within the second tab
+    selected = option_menu(
         menu_title="Main Navigation",
         options=["Home", "Documentation", "Examples", "Community", "About"],
-        icons=["house", "book", "app-indicator", "people", "info-circle"],
-        menu_icon="cast",
+        icons=["house", "book", "lightbulb", "people-fill", "info-circle"],
         orientation="horizontal"
     )
-    
-    # Logic để hiển thị nội dung dựa trên lựa chọn của người dùng
+
     if selected == "Home":
-        home()
+        st.title("Home")
+        st.write("Welcome to the home page!")
     elif selected == "Documentation":
-        documentation()
+        st.title("Documentation")
+        st.write("Here you can find all the documentation.")
     elif selected == "Examples":
-        examples()
+        st.title("Examples")
+        st.write("Check out these cool examples.")
     elif selected == "Community":
-        community()
+        st.title("Community")
+        st.write("Join our vibrant community!")
     elif selected == "About":
-        about()
+        st.title("About")
+        st.write("Learn more about our project.")
