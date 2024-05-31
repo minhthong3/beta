@@ -1,23 +1,9 @@
-from st_on_hover_tabs import on_hover_tabs
 import streamlit as st
-st.set_page_config(layout="wide")
-
-st.header("Custom tab component for on-hover navigation bar")
-st.markdown('<style>' + open('style.css').read() + '</style>', unsafe_allow_html=True)
+from streamlit_option_menu import option_menu
 
 
-with st.sidebar:
-    tabs = on_hover_tabs(tabName=['Dashboard', 'Money', 'Economy'], 
-                         iconName=['dashboard', 'money', 'economy'], default_choice=0)
 
-if tabs =='Dashboard':
-    st.title("Navigation Bar")
-    st.write('Name of option is {}'.format(tabs))
-
-elif tabs == 'Money':
-    st.title("Paper")
-    st.write('Name of option is {}'.format(tabs))
-
-elif tabs == 'Economy':
-    st.title("Tom")
-    st.write('Name of option is {}'.format(tabs))
+selected2 = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
+    icons=['house', 'cloud-upload', "list-task", 'gear'], 
+    menu_icon="cast", default_index=0, orientation="horizontal")
+selected2
