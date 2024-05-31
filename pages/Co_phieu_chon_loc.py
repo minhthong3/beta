@@ -77,7 +77,6 @@ with tab1:
         st.error(f"Không thể tải dữ liệu từ URL. Lỗi: {e}")
 
 with tab2:
-    from streamlit_option_menu import option_menu
     from streamlit_navigation_bar import navigation_bar
     
     # Tạo các trang cho mỗi phần của thanh điều hướng
