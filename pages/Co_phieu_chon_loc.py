@@ -91,8 +91,8 @@ with tab2:
     # Tạo thanh menu tab
     selected = option_menu(
     menu_title=None,  # Không tiêu đề cho menu
-    options=["Home", "GoodStock Analysis"],  # Tên các tab
-    icons=["house", "graph-up-arrow"],  # Icons cho từng tab
+    options=["Home", "GoodStock Analysis","Home"],  # Tên các tab
+    icons=["house", "graph-up-arrow", "graph-up-arrow"],  # Icons cho từng tab
     menu_icon="cast",  # Icon cho menu
     default_index=1,  # Mặc định chọn tab "GoodStock Analysis"
     orientation="horizontal"
