@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
+import streamlit_antd_components as sac
 
 # Set initial configuration for the Streamlit app
 st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="collapsed")
@@ -82,12 +83,6 @@ elif selected_page == "About":
 # Sidebar content
 with st.sidebar:
     st.write("This is the sidebar. Its width has been adjusted.")
-    import streamlit as st
-    import streamlit_antd_components as sac
-    
-    # Initialize the page configuration
-    st.set_page_config(page_title="AntD Menu Sidebar", initial_sidebar_state="expanded")
-    
     # Define a function to display the Ant Design styled menu in the sidebar
     def display_antd_menu():
         menu_items = sac.menu([
