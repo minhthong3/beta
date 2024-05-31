@@ -83,6 +83,8 @@ elif selected_page == "About":
 # Sidebar content
 with st.sidebar:
     st.write("This is the sidebar. Its width has been adjusted.")
+    # Initialize the page configuration
+    st.set_page_config(page_title="AntD Menu Sidebar", initial_sidebar_state="expanded")
     # Define a function to display the Ant Design styled menu in the sidebar
     def display_antd_menu():
         menu_items = sac.menu([
