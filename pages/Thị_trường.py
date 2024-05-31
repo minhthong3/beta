@@ -3,7 +3,7 @@ from streamlit_navigation_bar import st_navbar
 import streamlit_antd_components as sac
 
 # Set initial configuration for the Streamlit app
-st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="expanded")
+st.set_page_config(page_title="GoodStock Analysis")
 
 # CSS to reduce the width of the sidebar
 css = """
