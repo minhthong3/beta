@@ -18,7 +18,7 @@ styles = {
     "span": {
         "border-radius": "0.5rem",
         "color": "rgb(49, 51, 63)",
-        "margin": "0 0.05 rem",  # Tăng khoảng cách ngang giữa các mục
+        "margin": "0 0.025 rem",  # Tăng khoảng cách ngang giữa các mục
         "padding": "0.4375rem 0.625rem",
         "display": "inline-block",
         "white-space": "nowrap",
