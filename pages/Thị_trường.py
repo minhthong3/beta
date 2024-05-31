@@ -1,50 +1,60 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
+from streamlit_navigation_bar import st_navbar
 
-# 1. as sidebar menu
+# Set initial configuration for the Streamlit app
+st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="collapsed")
+
+# Define the pages and custom styles for the navigation bar
+pages = ["Home", "Documentation", "Examples", "Community", "About"]
+styles = {
+    "nav": {"background-color": "rgb(123, 209, 146)"},
+    "div": {"max-width": "32rem"},
+    "span": {
+        "border-radius": "0.5rem",
+        "color": "rgb(49, 51, 63)",
+        "margin": "0 0.125rem",
+        "padding": "0.4375rem 0.625rem",
+    },
+    "active": {"background-color": "rgba(255, 255, 255, 0.25)"},
+    "hover": {"background-color": "rgba(255, 255, 255, 0.35)"},
+}
+
+# Implement navigation bar and get the currently selected page
+selected_page = st_navbar(pages, styles=styles)
+
+# Define the content for each page
+def home():
+    st.title("Home")
+    st.write("Welcome to the home page!")
+
+def documentation():
+    st.title("Documentation")
+    st.write("Here you can find all the documentation.")
+
+def examples():
+    st.title("Examples")
+    st.write("Check out these cool examples.")
+
+def community():
+    st.title("Community")
+    st.write("Join our vibrant community!")
+
+def about():
+    st.title("About")
+    st.write("Learn more about our project.")
+
+# Display the content based on the selected page
+if selected_page == "Home":
+    home()
+elif selected_page == "Documentation":
+    documentation()
+elif selected_page == "Examples":
+    examples()
+elif selected_page == "Community":
+    community()
+elif selected_page == "About":
+    about()
+
+# Sidebar content
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Home", 'Settings'], 
-        icons=['house', 'gear'], menu_icon="cast", default_index=1)
-    selected
-
-# 2. horizontal menu
-selected2 = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
-    icons=['house', 'cloud-upload', "list-task", 'gear'], 
-    menu_icon="cast", default_index=0, orientation="horizontal")
-selected2
-
-# 3. CSS style definitions
-selected3 = option_menu(None, ["Home", "Upload",  "Tasks", 'Settings'], 
-    icons=['house', 'cloud-upload', "list-task", 'gear'], 
-    menu_icon="cast", default_index=0, orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", "background-color": "#fafafa"},
-        "icon": {"color": "orange", "font-size": "25px"}, 
-        "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "green"},
-    }
-)
-
-# 4. Manual item selection
-if st.session_state.get('switch_button', False):
-    st.session_state['menu_option'] = (st.session_state.get('menu_option', 0) + 1) % 4
-    manual_select = st.session_state['menu_option']
-else:
-    manual_select = None
-    
-selected4 = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
-    icons=['house', 'cloud-upload', "list-task", 'gear'], 
-    orientation="horizontal", manual_select=manual_select, key='menu_4')
-st.button(f"Move to Next {st.session_state.get('menu_option', 1)}", key='switch_button')
-selected4
-
-# 5. Add on_change callback
-def on_change(key):
-    selection = st.session_state[key]
-    st.write(f"Selection changed to {selection}")
-    
-selected5 = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'],
-                        icons=['house', 'cloud-upload', "list-task", 'gear'],
-                        on_change=on_change, key='menu_5', orientation="horizontal")
-selected5
-
+    st.write("Sidebar")
