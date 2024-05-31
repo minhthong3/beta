@@ -8,7 +8,7 @@ st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="colla
 css = """
 <style>
     .css-1cpxqw2 {
-        width: 200px !important; /* Giảm chiều rộng của sidebar xuống còn 200px */
+        width: 100px !important; /* Giảm chiều rộng của sidebar xuống còn 200px */
     }
 </style>
 """
