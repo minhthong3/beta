@@ -19,7 +19,7 @@ styles = {
         "border-radius": "0.5rem",
         "color": "rgb(49, 51, 63)",
         "margin": "0 0.05rem",
-        "padding": "0.4375rem 0.625rem",
+        "padding": "0.2375rem 0.325rem",
         "display": "inline-block",
         "white-space": "nowrap",
         "font-size": "12px"
