@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from streamlit_autorefresh import st_autorefresh
+from streamlit_navigation_bar import st_navbar
 
 # Tiêu đề của ứng dụng
 st.title("GoodStock")
