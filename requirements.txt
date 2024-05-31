@@ -5,3 +5,4 @@ oauth2client
 streamlit-autorefresh
 streamlit-option-menu
 streamlit_navigation_bar
+streamlit-on-Hover-tabs
