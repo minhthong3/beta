@@ -89,8 +89,7 @@ with tab2:
 
     
     # Tạo thanh menu tab
-    selected = option_menu
-    (
+    selected = option_menu(
     menu_title=None,  # Không tiêu đề cho menu
     options=["Home", "GoodStock Analysis"],  # Tên các tab
     icons=["house", "graph-up-arrow"],  # Icons cho từng tab
