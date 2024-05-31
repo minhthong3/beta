@@ -5,7 +5,7 @@ from streamlit_navigation_bar import st_navbar
 st.set_page_config(page_title="GoodStock Analysis", initial_sidebar_state="collapsed")
 
 # Define the pages and custom styles for the navigation bar
-pages = ["Home", "Documentation", "Examples", "Community", "About"]
+pages = ["Home", "Co_phieu_chon_loc", "Examples", "Community", "About"]
 styles = {
     "nav": {"background-color": "rgb(123, 209, 146)"},
     "div": {"max-width": "32rem"},
@@ -27,8 +27,8 @@ def home():
     st.title("Home")
     st.write("Welcome to the home page!")
 
-def documentation():
-    st.title("Documentation")
+def Co_phieu_chon_loc():
+    st.title("Co_phieu_chon_loc")
     st.write("Here you can find all the documentation.")
 
 def examples():
@@ -46,8 +46,8 @@ def about():
 # Display the content based on the selected page
 if selected_page == "Home":
     home()
-elif selected_page == "Documentation":
-    documentation()
+elif selected_page == "Co_phieu_chon_loc":
+    st.page_link("pages/Co_phieu_chon_loc.py")
 elif selected_page == "Examples":
     examples()
 elif selected_page == "Community":
