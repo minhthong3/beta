@@ -80,11 +80,13 @@ with tab2:
     from streamlit_option_menu import option_menu
     
     # Cho phép sử dụng CSS trong Streamlit
-    def local_css("css library/style.css"):
-        with open("css library/style.css") as f:
+    def local_css(file_name):
+        with open(file_name) as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
     
-    local_css("style.css")  # Tạo file style.css trong cùng thư mục hoặc thay đổi đường dẫn tương ứng
+    # Gọi hàm với đường dẫn chính xác, chú ý đến khoảng trắng trong tên thư mục
+    local_css("css library/style.css")
+
     
     # Tạo thanh menu tab
     selected = option_menu(
