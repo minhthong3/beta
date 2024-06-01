@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from streamlit_option_menu import option_menu
+from streamlit_autorefresh import st_autorefresh
 
 
 # Cấu hình trang web với chế độ wide mode
@@ -69,10 +70,11 @@ if selected2 == "FlashDeal":
 
     data = load_data()
     display_with_css(data)
-    
+
+    # Tự động làm mới trang sau mỗi 10 giây
+    st_autorefresh(interval=10 * 1000)
 
 elif selected2 == "Hướng dẫn":
     st.write("settings is my bettings")
     
-# Tự động làm mới trang sau mỗi 10 giây
-st_autorefresh(interval=10 * 1000)
+
