@@ -12,7 +12,7 @@ th {
     border: 1px solid white;  /* Đường viền màu trắng */
 }
 td {
-    background-color: white;  /* Nền màu trắng */
+    background-color: black;  /* Nền màu trắng */
     border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
     padding: 8px;
     text-align: left;
