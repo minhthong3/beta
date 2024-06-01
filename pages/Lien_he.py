@@ -133,8 +133,7 @@ if selected2 == "FlashDeal":
         st.markdown(html, unsafe_allow_html=True)
     
     def main():
-        # Cấu hình trang web với chế độ wide mode
-        st.set_page_config(layout="wide")
+
         
         st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
         st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
