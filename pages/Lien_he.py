@@ -9,8 +9,10 @@ from streamlit_autorefresh import st_autorefresh
 # Cấu hình trang web với chế độ wide mode
 st.set_page_config(layout="wide")
 
-st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
+st.title("Flash Deal") 
+st.title("Mua Nhanh - Chốt lời lẹ")
 st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
+
 
 selected2 = option_menu(None, ["FlashDeal", "Hướng dẫn"], 
     icons=['house', 'cloud-upload'], 
