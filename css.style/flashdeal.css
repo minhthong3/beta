@@ -6,33 +6,59 @@ table {
     margin-top: 20px;
 }
 th {
-    background-color: orange;
-    color: white;
-    text-align: center;
-    border: 1px solid white;
+    background-color: orange;  /* Nền màu cam cho tiêu đề */
+    color: white;  /* Chữ màu trắng */
+    text-align: center;  /* Văn bản căn giữa */
+    border: 1px solid white;  /* Đường viền màu trắng */
 }
 td {
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: white;  /* Nền màu trắng */
+    border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
     padding: 8px;
     text-align: left;
 }
+.tin_hieu {
+    color: black;
+}
 .tin_hieu[data-value="MUA"] {
-    color: green;
+    color: green;  /* Màu xanh lá cây cho "MUA" */
 }
 .tin_hieu[data-value="BÁN"] {
-    color: red;
+    color: red;  /* Màu đỏ cho "BÁN" */
 }
 .gia_hien_tai {
     color: black;
 }
-.percent[data-value^="-"] {
-    color: red;
+.gia_hien_tai[data-percent-value^="-"] {
+    color: red;  /* Màu đỏ cho giá trị âm */
 }
-.percent[data-value="0.0"], .percent[data-value="0"], .percent[data-value="0.00"] {
-    color: orange;
+.gia_hien_tai[data-percent-value="0.0"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.gia_hien_tai[data-percent-value="0"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.gia_hien_tai[data-percent-value="0.00"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.gia_hien_tai[data-percent-value]:not([data-percent-value^="-"]):not([data-percent-value="0"]):not([data-percent-value="0.0"]):not([data-percent-value="0.00"]) {
+    color: green;  /* Màu xanh lá cây cho giá trị dương */
+}
+.percent {
+    color: black;
+}
+.percent[data-value^="-"] {
+    color: red;  /* Màu đỏ cho giá trị âm */
+}
+.percent[data-value="0.0"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.percent[data-value="0"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.percent[data-value="0.00"] {
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
 }
 .percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {
-    color: green;
+    color: green;  /* Màu xanh lá cây cho giá trị dương */
 }
-
