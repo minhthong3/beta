@@ -14,7 +14,7 @@ selected2 = option_menu(None, ["FashDeal", "Hướng dẫn"],
     menu_icon="cast", default_index=0, orientation="horizontal")
 selected2
 
-if selected2 == "FlasgDeal":
+if selected2 == "FlashDeal":
     # CSS để làm cho nội dung chính rộng toàn màn hình
     css_code = """
     <style>
@@ -163,7 +163,7 @@ if selected2 == "FlasgDeal":
     
     if __name__ == "__main__":
         main()
-else:
+elif selected2 == "Hướng dẫn":
     st.write("settings is my bettings")
 
 
