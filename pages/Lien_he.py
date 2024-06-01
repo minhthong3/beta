@@ -9,6 +9,9 @@ from streamlit_autorefresh import st_autorefresh
 # Cấu hình trang web với chế độ wide mode
 st.set_page_config(layout="wide")
 
+st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
+st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
+
 selected2 = option_menu(None, ["FlashDeal", "Hướng dẫn"], 
     icons=['house', 'cloud-upload'], 
     menu_icon="cast", default_index=0, orientation="horizontal")
@@ -64,10 +67,6 @@ def display_with_css(df):
 
 # Kiểm tra nếu 'FlashDeal' được chọn
 if selected2 == "FlashDeal":
-    st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
-    st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
-    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
-
     data = load_data()
     display_with_css(data)
 
