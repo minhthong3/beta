@@ -1,7 +1,7 @@
 table {
     width: 95%;
     border-collapse: collapse;
-    background-color: black;
+    background-color: black;  /* Nền màu đen cho bảng */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
@@ -10,18 +10,23 @@ th {
     color: white;  /* Chữ màu trắng */
     text-align: center;  /* Văn bản căn giữa */
     border: 1px solid white;  /* Đường viền màu trắng */
+    font-size: 18px;  /* Kích thước chữ cho tiêu đề */
 }
 td {
-    background-color: black;  /* Nền màu trắng */
+    background-color: black;  /* Nền màu đen cho các ô */
     border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
     padding: 8px;
     text-align: left;
+    color: white;  /* Chữ màu trắng */
+    font-size: 16px;  /* Kích thước chữ cho ô dữ liệu */
 }
-.font_sticker {
+.font_ticker {
     color: white;
+    font-size: 16px;  /* Kích thước chữ cho cột Mã */
 }
 .tin_hieu {
-    color: black;
+    color: white;
+    font-size: 16px;  /* Kích thước chữ cho tín hiệu */
 }
 .tin_hieu[data-value="MUA"] {
     color: green;  /* Màu xanh lá cây cho "MUA" */
@@ -30,7 +35,8 @@ td {
     color: red;  /* Màu đỏ cho "BÁN" */
 }
 .gia_hien_tai {
-    color: black;
+    color: white;
+    font-size: 16px;  /* Kích thước chữ cho giá hiện tại */
 }
 .gia_hien_tai[data-percent-value^="-"] {
     color: red;  /* Màu đỏ cho giá trị âm */
@@ -48,7 +54,8 @@ td {
     color: green;  /* Màu xanh lá cây cho giá trị dương */
 }
 .percent {
-    color: black;
+    color: white;
+    font-size: 16px;  /* Kích thước chữ cho phần trăm */
 }
 .percent[data-value^="-"] {
     color: red;  /* Màu đỏ cho giá trị âm */
@@ -60,4 +67,8 @@ td {
     color: orange;  /* Màu vàng cho giá trị bằng 0 */
 }
 .percent[data-value="0.00"] {
-    color: o
+    color: orange;  /* Màu vàng cho giá trị bằng 0 */
+}
+.percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {
+    color: green;  /* Màu xanh lá cây cho giá trị dương */
+}
