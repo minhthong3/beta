@@ -16,17 +16,6 @@ selected2 = option_menu(None, ["FashDeal", "Hướng dẫn"],
 
 
 if selected2 == "FlashDeal":
-    # CSS để làm cho nội dung chính rộng toàn màn hình
-    css_code = """
-    <style>
-        .main > div {
-            max-width: 100%;
-            padding-left: 5%;
-            padding-right: 5%;
-        }
-    </style>
-    """
-    
     # Cấu hình xác thực
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("image.danhmuc/datavnwealth-25a353ea3781.json", scope)
