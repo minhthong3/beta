@@ -50,7 +50,7 @@ def display_with_css(df):
     # Định dạng một hàng dữ liệu từ DataFrame thành thẻ HTML <td>
     def format_row(row):
         return [
-            f'<td class="font_sticker">{row["Mã"]}</td>',
+            f'<td class="font_ticker">{row["Mã"]}</td>',
             format_value(row["Tín hiệu"], "tin_hieu"),
             f'<td class="gia_hien_tai" data-percent-value="{row["+/- %"]}">{row["Giá hiện tại"]}</td>',
             f'<td class="percent" data-value="{row["+/- %"]}">{row["+/- %"]}</td>'
