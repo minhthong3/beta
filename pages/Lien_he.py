@@ -36,61 +36,34 @@ def display_with_css(df):
             margin-top: 20px;
         }}
         th {{
-            background-color: orange;  /* Nền màu cam cho tiêu đề */
-            color: white;  /* Chữ màu trắng */
-            text-align: center;  /* Văn bản căn giữa */
-            border: 1px solid white;  /* Đường viền màu trắng */
+            background-color: orange;
+            color: white;
+            text-align: center;
+            border: 1px solid white;
         }}
         td {{
-            background-color: white;  /* Nền màu trắng */
-            border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
+            background-color: white;
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }}
-        .tin_hieu {{
-            color: black;
-        }}
         .tin_hieu[data-value="MUA"] {{
-            color: green;  /* Màu xanh lá cây cho "MUA" */
+            color: green;
         }}
         .tin_hieu[data-value="BÁN"] {{
-            color: red;  /* Màu đỏ cho "BÁN" */
+            color: red;
         }}
         .gia_hien_tai {{
             color: black;
         }}
-        .gia_hien_tai[data-percent-value^="-"] {{
-            color: red;  /* Màu đỏ cho giá trị âm */
-        }}
-        .gia_hien_tai[data-percent-value="0.0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .gia_hien_tai[data-percent-value="0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .gia_hien_tai[data-percent-value="0.00"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .gia_hien_tai[data-percent-value]:not([data-percent-value^="-"]):not([data-percent-value="0"]):not([data-percent-value="0.0"]):not([data-percent-value="0.00"]) {{
-            color: green;  /* Màu xanh lá cây cho giá trị dương */
-        }}
-        .percent {{
-            color: black;
-        }}
         .percent[data-value^="-"] {{
-            color: red;  /* Màu đỏ cho giá trị âm */
+            color: red;
         }}
-        .percent[data-value="0.0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .percent[data-value="0"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
-        }}
-        .percent[data-value="0.00"] {{
-            color: orange;  /* Màu vàng cho giá trị bằng 0 */
+        .percent[data-value="0.0"], .percent[data-value="0"], .percent[data-value="0.00"] {{
+            color: orange;
         }}
         .percent[data-value]:not([data-value^="-"]):not([data-value="0"]):not([data-value="0.0"]):not([data-value="0.00"]) {{
-            color: green;  /* Màu xanh lá cây cho giá trị dương */
+            color: green;
         }}
         </style>
         """, unsafe_allow_html=True
@@ -102,20 +75,11 @@ def display_with_css(df):
         return f'<td class="{class_name}" data-value="{val}">{val}</td>'
 
     def format_row(row):
-        percent_value = row["+/- %"]
-        gia_hien_tai_color_class = ""
-        if percent_value > 0:
-            gia_hien_tai_color_class = "gia_hien_tai"
-        elif percent_value < 0:
-            gia_hien_tai_color_class = "gia_hien_tai"
-        else:
-            gia_hien_tai_color_class = "gia_hien_tai"
-        
         return [
             f'<td>{row["Mã"]}</td>',
             format_value(row["Tín hiệu"], "tin_hieu"),
-            f'<td class="{gia_hien_tai_color_class}" data-percent-value="{percent_value}">{row["Giá hiện tại"]}</td>',
-            f'<td class="percent" data-value="{percent_value}">{percent_value}</td>'
+            f'<td class="gia_hien_tai" data-percent-value="{row["+/- %"]}">{row["Giá hiện tại"]}</td>',
+            f'<td class="percent" data-value="{row["+/- %"]}">{row["+/- %"]}</td>'
         ]
 
     formatted_rows = [format_row(row) for _, row in df.iterrows()]
@@ -127,6 +91,7 @@ def display_with_css(df):
     html += "</tbody></table>"
 
     st.markdown(html, unsafe_allow_html=True)
+
 
 if selected2 == "FlashDeal":
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
