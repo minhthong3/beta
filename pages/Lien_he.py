@@ -2,6 +2,16 @@ import streamlit as st
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from streamlit_option_menu import option_menu
+
+
+# Cấu hình trang web với chế độ wide mode
+st.set_page_config(layout="wide")
+
+selected2 = option_menu(None, ["FlashDeal", "Hướng dẫn"], 
+    icons=['house', 'cloud-upload'], 
+    menu_icon="cast", default_index=0, orientation="horizontal")
+
 
 # Hàm để tải dữ liệu từ Google Sheets
 def load_data():
@@ -52,13 +62,16 @@ def display_with_css(df):
     st.markdown(html, unsafe_allow_html=True)
 
 # Kiểm tra nếu 'FlashDeal' được chọn
-if 'FlashDeal' in st.session_state:
+if selected2 == "FlashDeal":
     st.title("Flash Deal - Mua Nhanh - Chốt lời lẹ")
-    st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")
-    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")
+    st.write("Tín hiệu khuyến nghị của Flash Deal dựa trên Chiến lược Đầu tư Kỹ thuật")  
+    st.write("Tín hiệu khuyến nghị thời gian thực - Dữ liệu được cập nhật 10 giây một lần từ 9h15 đến 15h00")  
 
     data = load_data()
     display_with_css(data)
-
+    
     # Tự động làm mới trang sau mỗi 10 giây
     st_autorefresh(interval=10 * 1000)
+
+elif selected2 == "Hướng dẫn":
+    st.write("settings is my bettings")
