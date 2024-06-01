@@ -20,7 +20,7 @@ def load_data():
 # Hàm để hiển thị bảng với CSS tùy chỉnh
 def display_with_css(df):
     # Đọc nội dung file CSS
-    with open("style/style.css") as f:
+    with open("style/flashdeal_style.css") as f:
         css = f.read()
     
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
