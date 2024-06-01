@@ -14,7 +14,7 @@ selected2 = option_menu(None, ["FashDeal", "Hướng dẫn"],
     menu_icon="cast", default_index=0, orientation="horizontal")
 selected2
 
-if selected2 == "Home":
+if selected2 == "FlasgDeal":
     # CSS để làm cho nội dung chính rộng toàn màn hình
     css_code = """
     <style>
