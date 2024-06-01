@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
+from streamlit_option_menu import option_menu
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
