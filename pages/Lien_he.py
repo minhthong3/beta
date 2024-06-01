@@ -12,7 +12,7 @@ st. write('Danh mục cổ phiếu là một tập hợp các cổ phiếu đư�
 selected2 = option_menu(None, ["FashDeal", "Hướng dẫn"], 
     icons=['house', 'cloud-upload'], 
     menu_icon="cast", default_index=0, orientation="horizontal")
-selected2
+
 
 if selected2 == "FlashDeal":
     # CSS để làm cho nội dung chính rộng toàn màn hình
