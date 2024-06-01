@@ -1,7 +1,7 @@
 table {
     width: 95%;
     border-collapse: collapse;
-    background-color: black;  /* Nền màu đen cho bảng */
+    background-color: white;  /* Nền màu đen cho bảng */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
@@ -13,7 +13,7 @@ th {
     font-size: 18px;  /* Kích thước chữ cho tiêu đề */
 }
 td {
-    background-color: black;  /* Nền màu đen cho các ô */
+    background-color: white;  /* Nền màu đen cho các ô */
     border: 1px solid #ddd;  /* Đường viền màu xám nhạt */
     padding: 8px;
     text-align: left;
