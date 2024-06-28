@@ -125,7 +125,7 @@ def display_with_css(df):
         ]
 
     # Sắp xếp dữ liệu
-    df_sorted = df.sort_values(by=["Tín hiệu"], na_position='last')
+    df_sorted = df.sort_values(by=["Tín hiệu"], na_position='first')
 
     formatted_rows = [format_row(row) for _, row in df_sorted.iterrows()]
     html = "<div class='scrollable-table-container'><table class='dataframe'>"
