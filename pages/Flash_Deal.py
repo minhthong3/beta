@@ -124,7 +124,10 @@ def display_with_css(df):
             f'<td class="percent" data-value="{percent_value}">{percent_value}</td>'
         ]
 
-    formatted_rows = [format_row(row) for _, row in df.iterrows()]
+    # Sắp xếp dữ liệu
+    df_sorted = df.sort_values(by=["Tín hiệu"], na_position='last')
+
+    formatted_rows = [format_row(row) for _, row in df_sorted.iterrows()]
     html = "<div class='scrollable-table-container'><table class='dataframe'>"
     html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>pct_change</th></tr></thead>"
     html += "<tbody>"
