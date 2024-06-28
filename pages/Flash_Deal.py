@@ -17,7 +17,6 @@ def load_data():
     sheet = client.open_by_url(sheet_url).sheet1
     data = sheet.get_all_records()
     df = pd.DataFrame(data)
-    st.write(df.columns)  # In ra tên cột để kiểm tra
     return df
 
 # Hiển thị dữ liệu với CSS
