@@ -17,6 +17,7 @@ def load_data():
     sheet = client.open_by_url(sheet_url).sheet1
     data = sheet.get_all_records()
     df = pd.DataFrame(data)
+    st.write(df.columns)  # In ra tên cột để kiểm tra
     return df
 
 # Hiển thị dữ liệu với CSS
@@ -98,7 +99,11 @@ def display_with_css(df):
         return f'<td class="{class_name}" data-value="{val}">{val}</td>'
 
     def format_row(row):
-        percent_value = row["+/- %"]
+        try:
+            percent_value = row["pct_change"]
+        except KeyError:
+            percent_value = 0  # Hoặc giá trị mặc định nào đó
+
         gia_hien_tai_color_class = ""
         if percent_value > 0:
             gia_hien_tai_color_class = "gia_hien_tai"
@@ -109,14 +114,14 @@ def display_with_css(df):
         
         return [
             f'<td>{row["Mã"]}</td>',
-            format_value(row["Tín hiệu"], "tin_hieu"),
-            f'<td class="{gia_hien_tai_color_class}" data-percent-value="{percent_value}">{row["Giá hiện tại"]}</td>',
+            format_value(row.get("Tín hiệu", ""), "tin_hieu"),  # Sử dụng get để tránh lỗi KeyError
+            f'<td class="{gia_hien_tai_color_class}" data-percent-value="{percent_value}">{row.get("Giá hiện tại", "")}</td>',
             f'<td class="percent" data-value="{percent_value}">{percent_value}</td>'
         ]
 
     formatted_rows = [format_row(row) for _, row in df.iterrows()]
     html = "<table class='dataframe'>"
-    html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>+/- %</th></tr></thead>"
+    html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>pct_change</th></tr></thead>"
     html += "<tbody>"
     for row in formatted_rows:
         html += "<tr>" + "".join(row) + "</tr>"
