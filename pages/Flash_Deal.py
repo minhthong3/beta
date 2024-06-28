@@ -124,12 +124,10 @@ def display_with_css(df):
             f'<td class="percent" data-value="{percent_value}">{percent_value}</td>'
         ]
 
-    # Tách và sắp xếp dữ liệu
-    df_with_signal = df.dropna(subset=["Tín hiệu"])
-    df_without_signal = df[df["Tín hiệu"].isna()]
-    df_sorted = pd.concat([df_with_signal, df_without_signal])
+    # Lọc dữ liệu để chỉ hiển thị các dòng có giá trị trong cột "Tín hiệu"
+    df_filtered = df.dropna(subset=["Tín hiệu"])
 
-    formatted_rows = [format_row(row) for _, row in df_sorted.iterrows()]
+    formatted_rows = [format_row(row) for _, row in df_filtered.iterrows()]
     html = "<div class='scrollable-table-container'><table class='dataframe'>"
     html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>pct_change</th></tr></thead>"
     html += "<tbody>"
