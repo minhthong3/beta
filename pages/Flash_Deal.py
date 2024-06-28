@@ -125,7 +125,7 @@ def display_with_css(df):
         ]
 
     # Lọc dữ liệu để chỉ hiển thị các dòng có giá trị trong cột "Tín hiệu"
-    df_filtered = df.dropna(subset=["Tín hiệu"])
+    df_filtered = df[df["Tín hiệu"].notnull() & df["Tín hiệu"].str.strip().ne("")]
 
     formatted_rows = [format_row(row) for _, row in df_filtered.iterrows()]
     html = "<div class='scrollable-table-container'><table class='dataframe'>"
