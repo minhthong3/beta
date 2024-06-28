@@ -25,12 +25,17 @@ def display_with_css(df):
     st.markdown(
         f"""
         <style>
-        table {{
-            width: 95%;
-            border-collapse: collapse;
+        .scrollable-table-container {{
+            max-height: 400px;  /* Chiều cao cố định cho bảng */
+            overflow-y: auto;  /* Cho phép cuộn theo chiều dọc */
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            border: 1px solid #ddd;  /* Đường viền cho bảng */
+        }}
+        table {{
+            width: 100%;
+            border-collapse: collapse;
         }}
         th {{
             background-color: orange;  /* Nền màu cam cho tiêu đề */
@@ -120,12 +125,12 @@ def display_with_css(df):
         ]
 
     formatted_rows = [format_row(row) for _, row in df.iterrows()]
-    html = "<table class='dataframe'>"
+    html = "<div class='scrollable-table-container'><table class='dataframe'>"
     html += "<thead><tr><th>Mã</th><th>Tín hiệu</th><th>Giá hiện tại</th><th>pct_change</th></tr></thead>"
     html += "<tbody>"
     for row in formatted_rows:
         html += "<tr>" + "".join(row) + "</tr>"
-    html += "</tbody></table>"
+    html += "</tbody></table></div>"
 
     st.markdown(html, unsafe_allow_html=True)
 
